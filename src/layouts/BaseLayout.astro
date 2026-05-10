@@ -1,0 +1,160 @@
+---
+import LanguageSwitch from "../components/LanguageSwitch.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import type { Locale, SiteCopy } from "../content/site";
+import "../styles/global.css";
+
+interface Props {
+  copy: SiteCopy;
+  locale: Locale;
+}
+
+const { copy, locale } = Astro.props;
+const canonical = locale === "en" ? "/en" : "/es";
+const englishUrl = new URL("/en", Astro.site);
+const spanishUrl = new URL("/es", Astro.site);
+const canonicalUrl = new URL(canonical, Astro.site);
+const ogImage = new URL("/social-preview.svg", Astro.site);
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "José Miguel Torres Hernández",
+  jobTitle: "Senior Software Engineer",
+  url: Astro.site?.toString() ?? "https://jmtrs.uk",
+  homeLocation: {
+    "@type": "Place",
+    name: locale === "en" ? "Valencia, Spain" : "Valencia, España",
+  },
+  sameAs: ["https://github.com/jmtrs", "https://www.linkedin.com/in/jmtrs/"],
+  email: "mailto:jmtorres15@gmail.com",
+};
+---
+
+<!doctype html>
+<html lang={locale} data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={copy.description} />
+    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="dark light" />
+    <title>{copy.pageTitle}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="es" href={spanishUrl} />
+    <link rel="alternate" hreflang="x-default" href={englishUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={copy.pageTitle} />
+    <meta property="og:description" content={copy.description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={copy.ogLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={copy.pageTitle} />
+    <meta name="twitter:description" content={copy.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline>
+      (() => {
+        const themeKey = "jmtrs-theme";
+        const storedTheme = window.localStorage.getItem(themeKey);
+        const theme =
+          storedTheme === "light" || storedTheme === "dark"
+            ? storedTheme
+            : "dark";
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{copy.skipToContent}</a>
+    <div class="site-shell">
+      <header class="site-header reveal">
+        <a class="brand" href={canonical}>
+          <span class="brand-mark">JMT</span>
+          <span class="brand-copy">
+            <strong>José Miguel Torres Hernández</strong>
+            <span>Senior Software Engineer</span>
+          </span>
+        </a>
+
+        <div class="header-meta">
+          <nav class="site-nav" aria-label="Primary">
+            {copy.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+          </nav>
+          <div class="site-controls">
+            <LanguageSwitch
+              locale={locale}
+              label={copy.languageSwitcherLabel}
+            />
+            <ThemeToggle
+              themeLabel={copy.themeLabel}
+              darkLabel={copy.darkLabel}
+              lightLabel={copy.lightLabel}
+            />
+            <a class="header-download" href={copy.headerCtaHref}>
+              {copy.headerCta}
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main id="content">
+        <slot />
+      </main>
+
+      <footer class="site-footer reveal">
+        <p>{copy.footer}</p>
+      </footer>
+    </div>
+
+    <script is:inline define:vars={{ locale }}>
+      (() => {
+        const localeKey = "jmtrs-locale";
+        const themeKey = "jmtrs-theme";
+        const root = document.documentElement;
+        const toggle = document.querySelector("[data-theme-toggle]");
+        const toggleValue = document.querySelector("[data-theme-value]");
+
+        const setTheme = (theme) => {
+          root.dataset.theme = theme;
+          window.localStorage.setItem(themeKey, theme);
+          if (toggleValue && toggle instanceof HTMLElement) {
+            const nextLabel =
+              theme === "dark"
+                ? (toggle.dataset.darkLabel ?? "Dark")
+                : (toggle.dataset.lightLabel ?? "Light");
+            toggleValue.textContent = nextLabel;
+          }
+        };
+
+        const initialTheme = root.dataset.theme === "light" ? "light" : "dark";
+        setTheme(initialTheme);
+
+        if (toggle instanceof HTMLButtonElement) {
+          toggle.addEventListener("click", () => {
+            const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+            setTheme(nextTheme);
+          });
+        }
+
+        window.localStorage.setItem(localeKey, locale);
+
+        document.querySelectorAll("[data-locale-link]").forEach((link) => {
+          link.addEventListener("click", () => {
+            const nextLocale = link.getAttribute("data-locale");
+            if (nextLocale) {
+              window.localStorage.setItem(localeKey, nextLocale);
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

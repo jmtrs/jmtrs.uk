@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">jmtrs.uk social preview</title>
+  <desc id="desc">Editorial monochrome preview card for jmtrs.uk</desc>
+  <defs>
+    <radialGradient id="glow" cx="0%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#050505" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#050505" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <rect x="64" y="64" width="1072" height="502" rx="32" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.12)" />
+  <text x="100" y="150" fill="#8d8d8d" font-family="Geist Mono, monospace" font-size="24" letter-spacing="4">JMTRS.UK</text>
+  <text x="100" y="255" fill="#f5f5f5" font-family="Geist Mono, monospace" font-size="72" font-weight="700" letter-spacing="-4">Jose Miguel</text>
+  <text x="100" y="332" fill="#f5f5f5" font-family="Geist Mono, monospace" font-size="72" font-weight="700" letter-spacing="-4">Torres Hernandez</text>
+  <text x="100" y="420" fill="#a1a1a1" font-family="Manrope, Arial, sans-serif" font-size="30">
+    Senior software engineer focused on secure delivery,
+  </text>
+  <text x="100" y="462" fill="#a1a1a1" font-family="Manrope, Arial, sans-serif" font-size="30">
+    full-stack execution, and practical AI workflows.
+  </text>
+</svg>

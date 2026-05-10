@@ -1,0 +1,29 @@
+---
+import type { Locale } from "../content/site";
+
+interface Props {
+  locale: Locale;
+  label: string;
+}
+
+const { locale, label } = Astro.props;
+---
+
+<nav class="locale-switch" aria-label={label}>
+  <a
+    href="/en"
+    data-locale-link
+    data-locale="en"
+    aria-current={locale === "en" ? "page" : undefined}
+  >
+    EN
+  </a>
+  <a
+    href="/es"
+    data-locale-link
+    data-locale="es"
+    aria-current={locale === "es" ? "page" : undefined}
+  >
+    ES
+  </a>
+</nav>
