@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20.10.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
@@ -17,11 +17,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.3.2",
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
     "@fontsource/geist-mono": "^5.2.7",
     "@fontsource/manrope": "^5.2.6",
-    "astro": "^5.7.13"
+    "astro": "^6.3.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
