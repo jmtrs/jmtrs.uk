@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from "astro:transitions";
 import DownloadIcon from "../components/DownloadIcon.astro";
 import LanguageSwitch from "../components/LanguageSwitch.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
@@ -18,6 +17,7 @@ interface Props {
 const { copy, locale } = Astro.props;
 const currentYear = new Date().getFullYear();
 const canonical = locale === "en" ? "/en" : "/es";
+const alternateLocalePath = locale === "en" ? "/es" : "/en";
 const siteUrl = Astro.site ?? new URL("https://jmtrs.uk");
 const cvLinkTarget = "_blank";
 const cvLinkRel = "noreferrer";
@@ -25,6 +25,13 @@ const englishUrl = new URL("/en", siteUrl);
 const spanishUrl = new URL("/es", siteUrl);
 const canonicalUrl = new URL(canonical, siteUrl);
 const ogImage = new URL("/social-preview.svg", siteUrl);
+const personName = "José Miguel Torres Hernández";
+const footerNameIndex = copy.footer.lastIndexOf(personName);
+const footerLead =
+  footerNameIndex >= 0
+    ? copy.footer.slice(0, footerNameIndex).trimEnd()
+    : copy.footer;
+const footerHasName = footerNameIndex >= 0;
 const schema = {
   ...personSchema,
   url: siteUrl.toString(),
@@ -49,6 +56,7 @@ const schema = {
     <link rel="alternate" hreflang="en" href={englishUrl} />
     <link rel="alternate" hreflang="es" href={spanishUrl} />
     <link rel="alternate" hreflang="x-default" href={englishUrl} />
+    <link rel="prefetch" href={alternateLocalePath} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta property="og:type" content="website" />
@@ -79,12 +87,12 @@ const schema = {
       type="application/ld+json"
       set:html={JSON.stringify(schema)}
     />
-    <ViewTransitions />
   </head>
   <body>
     <a class="skip-link" href="#content">{copy.skipToContent}</a>
     <div class="site-shell">
       <header
+        data-site-header
         class:list={[
           "site-header",
           { "has-nav": copy.nav.length > 0, "no-nav": copy.nav.length === 0 },
@@ -95,7 +103,14 @@ const schema = {
             <span class="brand-cloud bc-1" aria-hidden="true"></span>
             <span class="brand-cloud bc-2" aria-hidden="true"></span>
             <span class="brand-cloud bc-3" aria-hidden="true"></span>
-            <img src="/logo.svg" alt="" aria-hidden="true" class="brand-logo" width="32" height="32" />
+            <img
+              src="/logo.svg"
+              alt=""
+              aria-hidden="true"
+              class="brand-logo"
+              width="32"
+              height="32"
+            />
           </span>
           <span class="brand-copy">
             <strong>José Miguel Torres Hernández</strong>
@@ -118,7 +133,7 @@ const schema = {
         }
 
         <div class="header-actions reveal" style="--delay: 180ms;">
-          <LanguageSwitch transition:persist="locale-switch-main" locale={locale} label={copy.languageSwitcherLabel} />
+          <LanguageSwitch locale={locale} label={copy.languageSwitcherLabel} />
           <ThemeToggle themeLabel={copy.themeLabel} initialTheme="dark" />
           <a
             class="header-download"
@@ -164,7 +179,6 @@ const schema = {
 
             <div class="mobile-toolbar">
               <LanguageSwitch
-                transition:persist="locale-switch-mobile"
                 locale={locale}
                 label={copy.languageSwitcherLabel}
               />
@@ -187,8 +201,11 @@ const schema = {
         <slot />
       </main>
 
-      <footer class="site-footer reveal">
-        <p class="footer-copy">© {currentYear} · {copy.footer}</p>
+      <footer class="site-footer reveal" data-site-footer>
+        <p class="footer-copy">
+          <span>© {currentYear} · {footerLead}</span>
+          {footerHasName && <span class="footer-name"> {personName}</span>}
+        </p>
         <p class="footer-coords" aria-hidden="true">38.09°N 0.85°W</p>
         <p class="footer-interests">{copy.footerInterests}</p>
       </footer>

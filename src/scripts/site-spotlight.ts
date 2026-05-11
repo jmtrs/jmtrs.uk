@@ -1,7 +1,10 @@
 export {};
 
 const root = document.documentElement;
-const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const reducedMotionQuery = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+);
+const pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
 
 let animationFrame = 0;
 let nextX = 50;
@@ -20,7 +23,7 @@ const scheduleSpotlight = () => {
 };
 
 const setSpotlightFromPointer = (event: PointerEvent) => {
-  if (reducedMotionQuery.matches) {
+  if (reducedMotionQuery.matches || !pointerQuery.matches) {
     return;
   }
 
@@ -36,7 +39,7 @@ const resetSpotlight = () => {
 };
 
 const createClickRipple = (event: PointerEvent) => {
-  if (reducedMotionQuery.matches) {
+  if (reducedMotionQuery.matches || !pointerQuery.matches) {
     return;
   }
 
@@ -51,9 +54,13 @@ const createClickRipple = (event: PointerEvent) => {
   });
 };
 
-window.addEventListener("pointermove", setSpotlightFromPointer, {
-  passive: true,
-});
-window.addEventListener("pointerdown", createClickRipple, { passive: true });
-window.addEventListener("blur", resetSpotlight);
+if (pointerQuery.matches) {
+  window.addEventListener("pointermove", setSpotlightFromPointer, {
+    passive: true,
+  });
+  window.addEventListener("pointerdown", createClickRipple, { passive: true });
+  window.addEventListener("blur", resetSpotlight);
+}
+
+pointerQuery.addEventListener("change", resetSpotlight);
 reducedMotionQuery.addEventListener("change", resetSpotlight);

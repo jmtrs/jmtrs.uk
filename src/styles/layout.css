@@ -23,7 +23,7 @@
   box-sizing: border-box;
   min-height: 100dvh;
   margin: 0 auto;
-  padding: 0 0 2rem;
+  padding: 0 0 1rem;
 }
 
 .site-shell > main {
@@ -175,41 +175,55 @@ html[data-theme="dark"] .brand-logo {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.65rem;
-  padding: 2rem 0 0.5rem;
+  gap: 0.4rem;
+  padding: 1.25rem 0 0.35rem;
   margin-top: auto;
   text-align: center;
 }
 
 .footer-copy {
   margin: 0;
-  font-size: 0.78rem;
-  line-height: 1.45;
-  letter-spacing: 0.06em;
+  max-width: 32ch;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
   color: var(--color-secondary);
+}
+
+.footer-name {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .footer-coords {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  font-size: 0.64rem;
+  line-height: 1.2;
+  letter-spacing: 0.11em;
   color: var(--color-muted);
-  opacity: 0.45;
+  opacity: 0.4;
 }
 
 .footer-interests {
   margin: 0;
-  max-width: 34ch;
+  max-width: 30ch;
   font-family: var(--font-display);
-  font-size: 0.62rem;
-  line-height: 1.55;
-  letter-spacing: 0.08em;
+  font-size: 0.58rem;
+  line-height: 1.4;
+  letter-spacing: 0.09em;
   color: var(--color-muted);
-  opacity: 0.46;
+  opacity: 0.42;
   overflow-wrap: anywhere;
   text-align: center;
   text-transform: uppercase;
+}
+
+@media (max-width: 30.99rem) {
+  .site-footer {
+    width: min(100%, 30rem);
+    margin-inline: auto;
+  }
 }
 
 @media (min-width: 40rem) {
@@ -249,6 +263,10 @@ html[data-theme="dark"] .brand-logo {
     gap: 1rem;
   }
 
+  .site-shell {
+    padding: 0 0 2rem;
+  }
+
   .site-header.no-nav {
     grid-template-columns: minmax(0, 1fr) auto;
   }
@@ -259,5 +277,37 @@ html[data-theme="dark"] .brand-logo {
 
   .brand-copy span {
     font-size: 0.82rem;
+  }
+
+  .site-footer {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.65rem;
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-copy {
+    max-width: none;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-coords {
+    font-size: 0.7rem;
+    line-height: normal;
+    letter-spacing: 0.12em;
+    opacity: 0.45;
+  }
+
+  .footer-interests {
+    max-width: 34ch;
+    margin-left: auto;
+    font-size: 0.62rem;
+    line-height: 1.55;
+    letter-spacing: 0.08em;
+    opacity: 0.46;
+    white-space: nowrap;
   }
 }

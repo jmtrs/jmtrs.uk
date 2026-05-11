@@ -13,11 +13,9 @@
 .reveal {
   opacity: 0;
   transform: translateY(18px) scale(0.98);
-}
-
-.reveal.is-visible {
   animation: rise-in 580ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: var(--delay, 0ms);
+  will-change: opacity, transform;
 }
 
 @keyframes rise-in {
@@ -39,8 +37,7 @@
     transition: none !important;
   }
 
-  .reveal,
-  .reveal.is-visible {
+  .reveal {
     opacity: 1;
     transform: none;
     animation: none !important;

@@ -21,12 +21,22 @@ if (!copy) {
   <div class="home-stage">
     <section class="hero">
       <div class="hero-copy">
-        <h1 class="hero-title reveal" style="--delay: 80ms;">
+        <h1
+          class="hero-title reveal"
+          data-hero-title
+          data-hero-effect="full"
+          style="--delay: 80ms;"
+        >
           {
             copy.hero.title.map((line) => (
-              <span class="hero-line">
-                {line}
-                <span class="hero-cursor" aria-hidden="true" />
+              <span
+                class="hero-line"
+                data-text={line}
+                style={`--characters:${Array.from(line).length};`}
+              >
+                <span class="hero-line-text">{line}</span>
+                <span class="hero-line-overlay" aria-hidden="true">{line}</span>
+                <span class="hero-mobile-cursor" aria-hidden="true"></span>
               </span>
             ))
           }

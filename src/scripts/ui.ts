@@ -17,9 +17,17 @@ const desktopQuery = window.matchMedia("(min-width: 75rem)");
 const reducedMotionQuery = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 );
+const reducedDataQuery = window.matchMedia("(prefers-reduced-data: reduce)");
 
 const getPageLocale = (): string =>
   document.documentElement.lang === "es" ? "es" : "en";
+
+const canAnimatePageExit = () =>
+  !reducedMotionQuery.matches &&
+  !reducedDataQuery.matches;
+
+const canUseFullHeroEffect = () =>
+  !reducedMotionQuery.matches && !reducedDataQuery.matches;
 
 const getThemeToggles = () => document.querySelectorAll("[data-theme-toggle]");
 
@@ -33,6 +41,14 @@ const getMenuToggle = () => document.querySelector("[data-menu-toggle]");
 const getContactModal = () => document.querySelector("[data-contact-modal]");
 
 const getContactModalPanel = () => document.getElementById("contact-modal");
+
+const getHeroTitle = () => document.querySelector<HTMLElement>("[data-hero-title]");
+
+const getSiteHeader = () =>
+  document.querySelector<HTMLElement>("[data-site-header]");
+
+const getSiteFooter = () =>
+  document.querySelector<HTMLElement>("[data-site-footer]");
 
 const getFocusableElements = (container: HTMLElement) =>
   Array.from(
@@ -177,8 +193,8 @@ const bindInteractiveHandlers = () => {
     if (!(target instanceof Element)) {
       return;
     }
-    const localeLink = target.closest("[data-locale-link]");
-    if (!(localeLink instanceof HTMLElement)) {
+    const localeLink = target.closest<HTMLAnchorElement>("[data-locale-link]");
+    if (!(localeLink instanceof HTMLAnchorElement)) {
       return;
     }
     const nextLocale = localeLink.getAttribute("data-locale");
@@ -202,8 +218,8 @@ const bindInteractiveHandlers = () => {
       return;
     }
 
-    const localeLink = target.closest("[data-locale-link]");
-    if (localeLink instanceof HTMLElement) {
+    const localeLink = target.closest<HTMLAnchorElement>("[data-locale-link]");
+    if (localeLink instanceof HTMLAnchorElement) {
       const nextLocale = localeLink.getAttribute("data-locale");
       if (!nextLocale) {
         return;
@@ -218,6 +234,25 @@ const bindInteractiveHandlers = () => {
 
       setLocaleUi(nextLocale);
       closeMenu();
+
+      if (
+        event instanceof MouseEvent &&
+        (event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey)
+      ) {
+        return;
+      }
+
+      if (canAnimatePageExit()) {
+        event.preventDefault();
+        document.body.dataset.pageLeaving = "true";
+        window.setTimeout(() => {
+          window.location.href = localeLink.href;
+        }, 130);
+      }
       return;
     }
 
@@ -341,72 +376,39 @@ const syncUi = () => {
   syncLocaleUiFromDocument();
 };
 
-const initReveal = () => {
-  const allReveal = document.querySelectorAll<HTMLElement>(".reveal");
-  if (!allReveal.length) return;
+const syncLayoutMetrics = () => {
+  const header = getSiteHeader();
+  const footer = getSiteFooter();
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    allReveal.forEach((el) => el.classList.add("is-visible"));
+  if (header instanceof HTMLElement) {
+    root.style.setProperty("--site-header-height", `${header.offsetHeight}px`);
+  }
+
+  if (footer instanceof HTMLElement) {
+    root.style.setProperty("--site-footer-height", `${footer.offsetHeight}px`);
+  }
+};
+
+const updateHeroEffectMode = () => {
+  const heroTitle = getHeroTitle();
+  if (!(heroTitle instanceof HTMLElement)) {
     return;
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          (entry.target as HTMLElement).classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
-  );
-
-  allReveal.forEach((el) => observer.observe(el));
-};
-
-const initTypewriter = () => {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const line = document.querySelector<HTMLElement>(".hero-line");
-  if (!line) return;
-  const cursor = line.querySelector<HTMLElement>(".hero-cursor");
-  if (!cursor) return;
-
-  let fullText = "";
-  for (const node of Array.from(line.childNodes)) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      fullText += node.textContent ?? "";
-      (node as Text).textContent = "";
-    }
-  }
-  fullText = fullText.trim();
-  if (!fullText) return;
-
-  const textNode = document.createTextNode("");
-  line.insertBefore(textNode, cursor);
-
-  let i = 0;
-  const tick = () => {
-    textNode.data = fullText.slice(0, ++i);
-    if (i < fullText.length) setTimeout(tick, 55);
-  };
-
-  // Arranca con el inicio del rise-in del hero (--delay: 80ms)
-  setTimeout(tick, 80);
+  heroTitle.dataset.heroEffect = canUseFullHeroEffect() ? "full" : "compact";
 };
 
 bindInteractiveHandlers();
 syncUi();
-initReveal();
-initTypewriter();
+syncLayoutMetrics();
+updateHeroEffectMode();
 
-document.addEventListener("astro:after-swap", () => {
-  syncUi();
-  document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
-    el.style.setProperty("animation", "none");
-    el.style.setProperty("opacity", "1");
-    el.style.setProperty("transform", "none");
-    el.classList.add("is-visible");
-  });
-});
+window.addEventListener("resize", syncLayoutMetrics, { passive: true });
+reducedMotionQuery.addEventListener("change", updateHeroEffectMode);
+reducedDataQuery.addEventListener("change", updateHeroEffectMode);
+document.fonts?.ready
+  .then(() => {
+    syncLayoutMetrics();
+    updateHeroEffectMode();
+  })
+  .catch(() => undefined);
