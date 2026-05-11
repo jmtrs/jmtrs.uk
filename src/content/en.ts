@@ -17,7 +17,7 @@ export const web: SiteCopy = {
     intro:
       "I'm a Senior Software Engineer based in southeast Spain. I've been in this professionally since 2015, across backend, frontend, and APIs. I work mostly in Java, Node.js, Python, React, and now Rust 🦀.",
     summary:
-      " I also help engineering teams adopt AI tooling in ways that actually work: not just using the tools, but designing the governance, workflows, and practices that make it sustainable.",
+      "I also help engineering teams get real value from AI tools by defining how to integrate them into daily workflows with clear processes, best practices, and technical control.",
     actions: [
       {
         href: "/cv/jose-miguel-torres-hernandez-cv-en.pdf",
