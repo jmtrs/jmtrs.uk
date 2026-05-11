@@ -247,14 +247,6 @@ body[data-modal-open="true"] {
   overflow: hidden;
 }
 
-body[data-page-leaving="true"] .site-shell {
-  opacity: 0;
-  transform: translateY(0.5rem);
-  transition:
-    opacity 130ms ease-out,
-    transform 130ms ease-out;
-}
-
 a {
   color: inherit;
   text-decoration: none;

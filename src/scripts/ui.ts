@@ -22,9 +22,6 @@ const reducedDataQuery = window.matchMedia("(prefers-reduced-data: reduce)");
 const getPageLocale = (): string =>
   document.documentElement.lang === "es" ? "es" : "en";
 
-const canAnimatePageExit = () =>
-  !reducedMotionQuery.matches && !reducedDataQuery.matches;
-
 const canUseFullHeroEffect = () =>
   !reducedMotionQuery.matches && !reducedDataQuery.matches;
 
@@ -205,6 +202,23 @@ const bindInteractiveHandlers = () => {
     setLocaleUi(nextLocale);
   });
 
+  document.addEventListener(
+    "pointerover",
+    (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const localeLink = target.closest<HTMLAnchorElement>("[data-locale-link]");
+      if (!(localeLink instanceof HTMLAnchorElement)) return;
+      const { href } = localeLink;
+      if (document.head.querySelector(`link[rel="prefetch"][href="${href}"]`)) return;
+      const hint = document.createElement("link");
+      hint.rel = "prefetch";
+      hint.href = href;
+      document.head.appendChild(hint);
+    },
+    { passive: true },
+  );
+
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof Element)) {
@@ -246,25 +260,6 @@ const bindInteractiveHandlers = () => {
 
       setLocaleUi(nextLocale);
       closeMenu();
-
-      if (
-        event instanceof MouseEvent &&
-        (event.button !== 0 ||
-          event.metaKey ||
-          event.ctrlKey ||
-          event.shiftKey ||
-          event.altKey)
-      ) {
-        return;
-      }
-
-      if (canAnimatePageExit()) {
-        event.preventDefault();
-        document.body.dataset.pageLeaving = "true";
-        window.setTimeout(() => {
-          window.location.href = localeLink.href;
-        }, 130);
-      }
       return;
     }
 
