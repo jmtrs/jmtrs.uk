@@ -17,7 +17,7 @@ export const web: SiteCopy = {
   hero: {
     title: ["Hello, I'm Josemi."],
     intro:
-      "I'm a Senior Software Engineer based in southeast Spain. I've been in this professionally since 2015, across backend, frontend, and APIs. I work mostly in Java, Node.js, Python, React, and now Rust 🧡.",
+      "I'm a Senior Software Engineer based in southeast Spain. I've been in this professionally since 2015, across backend, frontend, and APIs. I work mostly in Java, Node.js, Python, React, and now Rust 🦀.",
     summary:
       " I also help engineering teams adopt AI tooling in ways that actually work: not just using the tools, but designing the governance, workflows, and practices that make it sustainable.",
     actions: [
