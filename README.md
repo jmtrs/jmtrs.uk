@@ -33,7 +33,7 @@ El servidor corre en `http://localhost:4321`.
 ```bash
 pnpm lint         # Prettier
 pnpm typecheck    # astro check
-pnpm build        # build + generación de PDFs
+pnpm build        # build + instalación automática de Chromium si falta + generación de PDFs
 pnpm preview      # previsualizar el build
 pnpm format       # Prettier --write
 ```

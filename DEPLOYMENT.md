@@ -12,8 +12,9 @@
 - Install command: `pnpm install`
 - Build command: `pnpm build`
 - Output directory: `dist`
+- Node version: `22.12.0` mediante `.node-version`
 
-El comando de build ejecuta `astro build`, luego `node scripts/generate-seo-artifacts.mjs` para generar el sitemap y después `node scripts/generate-cv-pdfs.mjs`, que usa Playwright para renderizar las páginas de CV a PDF.
+El comando de build comprueba primero si Chromium de Playwright está instalado y, si falta, lo descarga automáticamente. Después ejecuta `astro build`, luego `node scripts/generate-seo-artifacts.mjs` para generar el sitemap y después `node scripts/generate-cv-pdfs.mjs`, que usa Playwright para renderizar las páginas de CV a PDF.
 
 ## Flujo del repositorio
 
@@ -54,11 +55,12 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 El workflow `.github/workflows/ci.yml` se ejecuta en cada push a `main` y en pull requests:
 
 1. Checkout
-2. Setup pnpm 10 + Node.js 20
+2. Setup pnpm 10 + Node.js 22.12.0
 3. `pnpm install --frozen-lockfile`
-4. `pnpm lint` (Prettier)
-5. `pnpm typecheck` (astro check)
-6. `pnpm build`
+4. `pnpm exec playwright install --with-deps chromium`
+5. `pnpm lint` (Prettier)
+6. `pnpm typecheck` (astro check)
+7. `pnpm build`
 
 ## Checklist post-despliegue
 
