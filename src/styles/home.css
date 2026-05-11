@@ -1,5 +1,4 @@
-.hero,
-.content-section {
+.hero {
   position: relative;
 }
 
@@ -77,14 +76,10 @@
   color: var(--color-secondary);
 }
 
-.action-row,
-.download-actions {
+.action-row {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-}
-
-.action-row {
   margin-top: 3rem;
 }
 
@@ -157,124 +152,6 @@
 .button.primary .button-emblem,
 .button.secondary .button-emblem {
   background: none;
-}
-
-/* Shared panel base — applies to all card types */
-.timeline-card,
-.project-card,
-.strength-card,
-.downloads-panel {
-  border: 1px solid var(--color-border);
-  border-radius: var(--surface-radius);
-  background: linear-gradient(
-    160deg,
-    var(--color-panel-strong),
-    var(--color-panel) 72%
-  );
-  box-shadow:
-    var(--shadow-soft),
-    inset 0 1px 0 color-mix(in srgb, var(--color-accent) 7%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 3%, transparent);
-}
-
-.timeline-card,
-.project-card,
-.strength-card {
-  transition:
-    transform var(--transition-fast),
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-}
-
-.timeline-card:hover,
-.project-card:hover,
-.strength-card:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--color-border) 130%, transparent);
-  box-shadow: var(--shadow-strong);
-}
-
-.content-section {
-  padding: 5rem 0;
-}
-
-.content-section + .content-section {
-  padding-top: 5rem;
-}
-
-.copy-grid {
-  display: grid;
-  gap: 1rem;
-  max-width: 54rem;
-}
-
-.copy-grid p {
-  margin: 0;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  letter-spacing: -0.012em;
-  color: var(--color-secondary);
-}
-
-.timeline,
-.card-grid,
-.contact-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.timeline-card,
-.project-card,
-.strength-card,
-.downloads-panel {
-  padding: 1.2rem;
-}
-
-.plain-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.plain-list li {
-  position: relative;
-  padding-left: 1.25rem;
-  font-size: 1rem;
-  line-height: 1.7;
-  letter-spacing: -0.012em;
-  color: var(--color-text);
-}
-
-.plain-list li + li {
-  margin-top: 0.8rem;
-}
-
-.plain-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.8rem;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background: var(--color-accent);
-}
-
-.split-section {
-  display: grid;
-  gap: 1rem;
-}
-
-.downloads-panel .section-heading {
-  margin-bottom: 1rem;
-}
-
-.downloads-panel .section-heading h2 {
-  font-size: clamp(1.7rem, 5vw, 2.7rem);
-}
-
-.contact-grid {
-  grid-template-columns: 1fr;
 }
 
 .contact-modal {
@@ -459,8 +336,7 @@
 }
 
 @media (min-width: 31rem) {
-  .action-row,
-  .download-actions {
+  .action-row {
     gap: 0.75rem;
   }
 
@@ -481,34 +357,9 @@
   }
 }
 
-@media (min-width: 40rem) {
-  .card-grid,
-  .contact-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (min-width: 75rem) {
   .home-stage {
     min-height: calc(100dvh - 15rem);
-  }
-
-  .copy-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem 2rem;
-  }
-
-  .timeline {
-    gap: 1.25rem;
-  }
-
-  .strengths-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .split-section {
-    grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.85fr);
-    align-items: start;
   }
 
   .contact-modal-shell {
@@ -519,14 +370,5 @@
     max-height: calc(100dvh - 2rem);
     padding: 1.65rem;
     border-radius: calc(var(--surface-radius) + 0.25rem);
-  }
-}
-
-@media (min-width: 80rem) {
-  .project-card,
-  .strength-card,
-  .timeline-card,
-  .downloads-panel {
-    padding: 1.45rem;
   }
 }

@@ -1,0 +1,16 @@
+---
+---
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>jmtrs.uk</title>
+    <script is:inline>
+      const stored = window.localStorage.getItem("jmtrs-locale");
+      const browser = navigator.language || navigator.languages?.[0] || "";
+      const browserLocale = browser.toLowerCase().startsWith("es") ? "es" : "en";
+      const locale = stored === "es" || stored === "en" ? stored : browserLocale;
+      window.location.replace("/" + locale);
+    </script>
+  </head>
+  <body></body>
+</html>

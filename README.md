@@ -1,71 +1,90 @@
 # jmtrs.uk
 
-Bilingual personal site for `https://jmtrs.uk`, built as a content-driven Astro project and deployed to Cloudflare Pages.
+Sitio web personal bilingüe para `https://jmtrs.uk`, construido con Astro y desplegado en Cloudflare Pages.
 
-The v1 site is intentionally not a PDF CV replica. It turns the existing EN/ES resume into a modern personal website with:
+El sitio tiene dos secciones principales: una página de inicio con hero y modal de contacto, y un CV tipográfico generado como PDF a partir de HTML en el build.
 
-- explicit locale routes at `/en` and `/es`
-- dark mode by default and a complete light theme
-- responsive editorial layout inspired by the GitHub Copilot rollout deck
-- accessible motion, strong SEO foundations, and downloadable CV PDFs
+- rutas localizadas en `/en` y `/es`
+- dark mode por defecto con tema light completo
+- layout editorial responsivo
+- motion accesible y fundamentos SEO sólidos
+- PDFs del CV autogenerados en cada build
 
 ## Stack
 
 - Astro + TypeScript
-- Localized content in versioned TypeScript files
-- CSS design tokens and handcrafted responsive layout
-- Cloudflare Pages static deployment
+- Contenido localizado en ficheros TypeScript versionados
+- CSS handcrafted con design tokens
+- Playwright para la generación de PDFs del CV
+- Cloudflare Pages (salida estática)
 
-## Local development
+## Desarrollo local
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-The app runs locally at `http://localhost:4321`.
+El servidor corre en `http://localhost:4321`.
 
-## Commands
+## Comandos
 
 ```bash
-pnpm lint
-pnpm typecheck
-pnpm build
-pnpm preview
+pnpm lint         # Prettier
+pnpm typecheck    # astro check
+pnpm build        # build + generación de PDFs
+pnpm preview      # previsualizar el build
+pnpm format       # Prettier --write
 ```
 
-## Project documents
+## Documentos del proyecto
 
-- `PLAN.md`: living project checklist
-- `ARCHITECTURE.md`: technical decisions and public interfaces
-- `CONTENT_MODEL.md`: content structure and localization source of truth
-- `DESIGN_SYSTEM.md`: visual tokens, layout, and motion rules
-- `DEPLOYMENT.md`: GitHub and Cloudflare Pages setup
-- `SEO.md`: metadata, canonical strategy, and indexing rules
+- `ARCHITECTURE.md` — decisiones técnicas e interfaces públicas
+- `CONTENT_MODEL.md` — estructura de contenido y modelo de localización
+- `DESIGN_SYSTEM.md` — tokens visuales, layout y reglas de motion
+- `DEPLOYMENT.md` — configuración de GitHub y Cloudflare Pages
+- `SEO.md` — metadata, canónicas y estrategia de indexación
 
-## Structure
+## Estructura
 
 ```text
 .
 ├── public/
-│   ├── cv/
+│   ├── cv/                    # PDFs generados (en + es)
+│   ├── icons/
 │   ├── favicon.svg
+│   ├── logo.svg
 │   ├── social-preview.svg
 │   ├── robots.txt
+│   ├── site.webmanifest
 │   └── _headers
+├── scripts/
+│   └── generate-cv-pdfs.mjs  # Playwright: renderiza /cv/[locale] → PDF
 ├── src/
-│   ├── components/
-│   ├── content/
+│   ├── components/            # ContactCard, DownloadIcon, LanguageSwitch, ThemeToggle
+│   ├── content/               # Tipos, en.ts, es.ts, site.ts
 │   ├── layouts/
+│   │   └── BaseLayout.astro
 │   ├── pages/
+│   │   ├── [locale]/index.astro   # Página de inicio (hero + contacto)
+│   │   ├── cv/[locale].astro      # CV HTML para impresión / PDF
+│   │   └── index.astro            # Resolver de idioma (/ → /en | /es)
+│   ├── scripts/
+│   │   ├── ui.ts                  # Menú, modal, tema, idioma, reveal
+│   │   └── site-spotlight.ts      # Efecto spotlight de fondo
 │   └── styles/
+│       ├── global.css
+│       ├── home.css
+│       ├── header-controls.css
+│       ├── layout.css
+│       └── utilities.css
 ├── .github/workflows/ci.yml
 └── *.md
 ```
 
-## Deployment summary
+## Resumen de despliegue
 
-- GitHub hosts the source repository and pull requests
-- Cloudflare Pages builds the site from the default branch
-- Production domain: `https://jmtrs.uk`
-- Canonical locale routes: `https://jmtrs.uk/en` and `https://jmtrs.uk/es`
+- GitHub aloja el repositorio y gestiona los pull requests
+- Cloudflare Pages construye el sitio desde la rama `main`
+- Dominio de producción: `https://jmtrs.uk`
+- Rutas canónicas: `https://jmtrs.uk/en` y `https://jmtrs.uk/es`

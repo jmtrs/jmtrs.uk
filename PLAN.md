@@ -1,43 +1,47 @@
 # Project Plan — jmtrs.uk
 
-## Phase 0 — Foundation
+## Fase 0 — Fundamentos
 
-- [x] Create a dedicated repository workspace at `jmtrs.uk`
-- [x] Define the project stack and deployment target
-- [x] Add decision-complete project documentation
-- [x] Initialize Git inside the new repo
+- [x] Crear el repositorio del proyecto
+- [x] Definir el stack y el destino de despliegue
+- [x] Añadir documentación de proyecto
+- [x] Inicializar Git
 
-## Phase 1 — Architecture and content model
+## Fase 1 — Arquitectura y modelo de contenido
 
-- [x] Lock canonical locale routes to `/en` and `/es`
-- [x] Define the root locale resolver behavior
-- [x] Define theme persistence with dark mode as default
-- [x] Establish the content source of truth from the current EN/ES CV files
-- [x] Define the v1 section map for the website
+- [x] Fijar rutas canónicas en `/en` y `/es`
+- [x] Definir el resolver de idioma en `/`
+- [x] Definir persistencia de tema con dark mode por defecto
+- [x] Establecer la fuente de verdad del contenido (TypeScript localizado)
+- [x] Definir el mapa de secciones del sitio
 
-## Phase 2 — Site implementation
+## Fase 2 — Implementación
 
-- [x] Scaffold Astro + TypeScript project structure
-- [x] Implement global layout, metadata, and JSON-LD
-- [x] Implement localized homepage rendering
-- [x] Implement language switcher and theme toggle
-- [x] Build responsive editorial UI with dark and light themes
-- [x] Add downloadable CV PDF assets
+- [x] Scaffolding Astro + TypeScript
+- [x] Layout global, metadata y JSON-LD
+- [x] Renderizado de la homepage localizada (hero + modal de contacto)
+- [x] Selector de idioma y toggle de tema
+- [x] UI editorial responsiva con temas dark y light
+- [x] Página de CV imprimible (`/cv/[locale]`)
+- [x] Script de generación de PDFs con Playwright
+- [x] Efecto spotlight de fondo
+- [x] Typewriter en el título del hero
+- [x] Nubes animadas en el logo de la cabecera
 
-## Phase 3 — Delivery and quality
+## Fase 3 — Calidad y entrega
 
-- [x] Add `robots.txt`, sitemap support, security headers, and web manifest
-- [x] Add GitHub Actions CI for `lint`, `typecheck`, and `build`
-- [x] Install dependencies
-- [x] Run `pnpm lint`
-- [x] Run `pnpm typecheck`
-- [x] Run `pnpm build`
-- [x] Validate the UI locally in a browser
+- [x] `robots.txt`, sitemap, security headers y web manifest
+- [x] GitHub Actions CI (lint, typecheck, build)
+- [x] Lint, typecheck y build en verde
 
-## Phase 4 — Publishing
+## Fase 4 — Publicación
 
-- [ ] Create the remote GitHub repository
-- [ ] Push the initial codebase
-- [ ] Connect the repository to Cloudflare Pages
-- [ ] Attach `jmtrs.uk` as the production domain
-- [ ] Validate production SEO and locale routing
+- [X] Repositorio en GitHub
+- [ ] Proyecto conectado a Cloudflare Pages
+- [ ] Dominio `jmtrs.uk` en producción
+- [ ] SEO y enrutamiento de locale validados en producción
+
+## Fase 5 — Mantenimiento
+
+- [x] Limpieza de código muerto: componentes, tipos, CSS y scripts sin uso eliminados
+- [x] Documentación actualizada a la estructura real del proyecto

@@ -1,71 +1,62 @@
 # Content Model
 
-## Source of truth
+## Fuente de verdad
 
-The website content is based on the current bilingual CV files supplied outside this repository:
+El contenido del sitio vive en:
 
-- `/Users/jmtrs/Downloads/Jose_Miguel_Torres_Hernandez_CV_Exact_Replica_Source.html`
-- `/Users/jmtrs/Downloads/Jose_Miguel_Torres_Hernandez_CV_Modern_Gray_ES_Source.html`
-- `/Users/jmtrs/Downloads/Jose_Miguel_Torres_Hernandez_CV_Modern_Gray.pdf`
-- `/Users/jmtrs/Downloads/Jose_Miguel_Torres_Hernandez_CV_Modern_Gray_ES.pdf`
+- `src/content/types.ts` — definiciones de tipos TypeScript
+- `src/content/en.ts` — contenido en inglés (web + cv)
+- `src/content/es.ts` — contenido en español (web + cv)
+- `src/content/site.ts` — re-exporta tipos y agrega los registros indexados por locale
 
-Inside the repo, the current canonical source is:
+## Estructura de la página de inicio (`SiteCopy`)
 
-- `src/content/site.ts`
+Cada locale exporta un objeto `web: SiteCopy` con estas secciones:
 
-## v1 section map
+### Cabecera y meta
+- `pageTitle`, `description`, `ogLocale`
+- `languageSwitcherLabel`, `menuLabel`, `themeLabel`, `skipToContent`
+- `headerCta`, `headerCtaHref` — botón del CV en la cabecera
+- `nav` — array de ítems de navegación (actualmente vacío)
 
-### Shared sections
+### Hero
+- `title: string[]` — líneas del título (typewriter)
+- `intro: string` — párrafo principal
+- `summary: string` — párrafo secundario
+- `actions: Action[]` — botones CTA (variante `primary` o `secondary`)
 
-1. Hero
-2. About
-3. Selected experience
-4. Key projects
-5. Technical strengths
-6. Working style
-7. Contact and downloads
+### Contacto (modal)
+- `eyebrow`, `title`, `intro`, `closeLabel`
+- `links: ContactLink[]` — cada enlace tiene `label`, `href`, `value`
 
-### Content rules
+### Footer
+- `footer: string` — línea de copyright
+- `footerInterests: string` — intereses personales
 
-- Keep both locales equivalent in structure and intent
-- Rewrite the CV for screen reading, not A4 replication
-- Prefer short, scannable blocks over long paragraphs
-- Avoid confidential project details
-- Keep claims supported by the current CV
+## Estructura del CV (`CvCopy`)
 
-## Transformation strategy
+Cada locale exporta un objeto `cv: CvCopy` para la página de CV imprimible:
 
-### Reused directly from the CV
+- `headline` — subtítulo profesional
+- `profile: string[]` — párrafos del perfil
+- `contact` — teléfono, email, location, linkedin, github
+- `techStack: CvTechCategory[]` — categorías con nombre e items
+- `spokenLanguages: CvSpokenLanguage[]`
+- `keyStrengths: CvKeyStrength[]`
+- `experience: CvExperienceItem[]` — con role, company, location?, period, roleNote?, bullets
+- `focus: CvFocusItem[]`
+- `certifications: CvCertification[]`
+- `education: CvEducation`
+- `profileFit: string[]`
+- `labels` — todas las etiquetas de sección en el idioma del locale
 
-- name and professional positioning
-- location
-- contact channels
-- core stack and strengths
-- employment history
-- project references already named in the CV
-- certifications and education mentions where relevant
+## Reglas de contenido
 
-### Rewritten for the website
+- Las dos locales deben ser equivalentes en estructura e intención
+- El contenido del CV imprimible (`CvCopy`) se mantiene más detallado que el web
+- Ambas locales deben tener las mismas claves — el tipo TypeScript lo garantiza en compilación
+- No incluir información confidencial de proyectos de cliente
 
-- hero positioning
-- section intros
-- project summaries
-- working style statements
-- CTA copy
+## Tipos de datos
 
-## Content object shape
-
-Each locale exports:
-
-- metadata
-- navigation labels
-- hero content
-- about copy
-- experience entries
-- project cards
-- strengths grid
-- working style bullets
-- contact card
-- footer note
-
-This shape is intentionally rigid so EN and ES cannot drift structurally.
+Los tipos están definidos en `src/content/types.ts` y re-exportados desde `src/content/site.ts`. Los tipos compartidos entre web y CV son `Action` y `ContactLink`. Los tipos exclusivos del CV (`CvTechCategory`, `CvExperienceItem`, etc.) no forman parte de `SiteCopy`.

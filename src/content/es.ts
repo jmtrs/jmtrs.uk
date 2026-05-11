@@ -1,12 +1,10 @@
 import type { SiteCopy, CvCopy } from "./types";
 
 export const web: SiteCopy = {
-  locale: "es",
   pageTitle: "José Miguel Torres Hernández | Senior Software Engineer",
   description:
     "Senior software engineer con trabajo en backend, frontend, entrega segura y flujos prácticos de ingeniería asistida por IA.",
   ogLocale: "es_ES",
-  languageName: "Español",
   languageSwitcherLabel: "Selector de idioma",
   menuLabel: "Menú",
   nav: [],
@@ -30,164 +28,6 @@ export const web: SiteCopy = {
         href: "#contact-modal",
         label: "Contacto",
         variant: "secondary",
-      },
-    ],
-    stats: [
-      { label: "Experiencia", value: "10+ años" },
-      { label: "Stack", value: "Java · Node.js · Python · React" },
-      { label: "Base", value: "Sureste de España" },
-    ],
-  },
-  about: {
-    eyebrow: "Perfil",
-    title:
-      "Cobertura técnica amplia, desde implementación hasta enablement de equipos.",
-    paragraphs: [
-      "Tengo un perfil amplio de product engineering en Java y Spring Boot, Node.js, Python, React, TypeScript, APIs, testing, CI/CD y preparación para producción.",
-      "Me muevo con comodidad entre arquitectura, implementación, calidad de código, soporte a releases, documentación y mejoras prácticas de workflow para equipos de ingeniería.",
-    ],
-  },
-  experience: {
-    eyebrow: "Experiencia seleccionada",
-    title:
-      "Profundidad de delivery en software enterprise, productos frontend y trabajo web end-to-end.",
-    intro:
-      "El hilo conductor de estos roles es el mismo: entrega fiable, estándares claros de ingeniería y ejecución práctica a lo largo de todo el stack.",
-    items: [
-      {
-        role: "Senior Software Engineer",
-        company: "SNGULAR",
-        location: "Remoto",
-        period: "Jul 2021 - Actualidad",
-        summary:
-          "Entrega de software enterprise en backend y full-stack, prácticas de ingeniería segura, mentoring y adopción práctica de IA.",
-        bullets: [
-          "Entrego servicios backend, APIs, integraciones frontend y componentes orientados a plataforma en contextos técnicos exigentes.",
-          "Trabajo principalmente con Java y Spring Boot, y también contribuyo en soluciones con Node.js, NestJS, Python y FastAPI.",
-          "Refuerzo entrega segura, calidad de código, flujos CI/CD, preparación para release y workflows reutilizables asistidos por IA.",
-        ],
-      },
-      {
-        role: "Frontend Developer",
-        company: "nexum AG",
-        location: "Remoto",
-        period: "Mar 2019 - Jul 2021",
-        summary:
-          "Trabajo frontend en producción con foco en mantenibilidad, rendimiento y ejecución fiable de producto.",
-        bullets: [
-          "Construí interfaces complejas con React, Next.js, TypeScript y Apollo GraphQL.",
-          "Colaboré de cerca con equipos de backend y producto para convertir requisitos en sistemas mantenibles orientados al usuario.",
-          "Participé en proyectos como thesting.com y manor.ch.",
-        ],
-      },
-      {
-        role: "Freelance Web Developer",
-        company: "Proyectos independientes",
-        location: "España",
-        period: "2015 - 2019",
-        summary:
-          "Entrega end-to-end de proyectos web, desde implementación y despliegue hasta comunicación con cliente y mejora iterativa.",
-        bullets: [
-          "Trabajé en frontend y backend con React, Redux, REST APIs, C# y PHP.",
-          "Me ocupé de SEO, mejoras de rendimiento, migraciones y evolución de productos digitales ya existentes.",
-          "Aprendí a equilibrar restricciones de negocio con implementación mantenible desde el inicio.",
-        ],
-      },
-    ],
-  },
-  projects: {
-    eyebrow: "Proyectos clave",
-    title: "Trabajo que refleja cómo me gusta construir.",
-    intro:
-      "Trabajo seleccionado de los últimos 10 años en entrega enterprise, frontend de producto y adopción práctica de IA.",
-    items: [
-      {
-        title: "Workflows de IA para ingeniería",
-        description:
-          "Workflows de desarrollo asistido por LLMs en SNGULAR — instrucciones de repositorio, documentación automatizada, patrones de prompt engineering y tooling de productividad adoptados por equipos de ingeniería.",
-        tags: ["Python", "LLMs", "Prompt engineering", "Developer tooling"],
-      },
-      {
-        title: "Entrega enterprise full-stack",
-        description:
-          "Servicios backend Java/Spring Boot, APIs e integraciones full-stack para clientes enterprise en SNGULAR. Cubre CI/CD, Secure SDLC, preparación para producción y ejecución cross-stack.",
-        tags: ["Java", "Spring Boot", "Node.js", "Secure SDLC"],
-      },
-      {
-        title: "Plataformas frontend de producto",
-        description:
-          "Trabajo frontend en producción para plataformas e-commerce, retail y fintech de clientes internacionales. React, Next.js, TypeScript y Apollo GraphQL — interfaces complejas y con alto volumen de datos entregadas a producción.",
-        tags: ["React", "Next.js", "TypeScript", "Apollo GraphQL"],
-      },
-      {
-        title: "Productos web independientes",
-        description:
-          "Entrega end-to-end para clientes web — frontends en React, integración de REST APIs, CMS, mejoras SEO, optimización de rendimiento y despliegue en múltiples proyectos independientes.",
-        tags: ["React", "REST APIs", "SEO", "End-to-end"],
-      },
-    ],
-  },
-  strengths: {
-    eyebrow: "Fortalezas técnicas",
-    title: "Capacidades que aporto de forma más consistente.",
-    items: [
-      {
-        title: "Backend y APIs",
-        description:
-          "Java, Spring Boot, Node.js, NestJS, Python, FastAPI, REST y GraphQL.",
-      },
-      {
-        title: "Ejecución frontend",
-        description:
-          "React, Next.js, Vue, Angular, TypeScript y delivery de UI mantenible.",
-      },
-      {
-        title: "Ingeniería segura",
-        description:
-          "Secure SDLC, autenticación, autorización, mentalidad AppSec, reducción de riesgos y preparación para producción.",
-      },
-      {
-        title: "Adopción práctica de IA",
-        description:
-          "Desarrollo asistido por LLMs, workflows de coding, automatización y guías a nivel de repositorio.",
-      },
-      {
-        title: "Sistemas de delivery",
-        description:
-          "Testing, CI/CD, observabilidad, soporte a releases y hábitos cloud-ready.",
-      },
-      {
-        title: "Colaboración técnica",
-        description:
-          "Mentoring, documentación, arquitectura pragmática y delivery cross-functional.",
-      },
-    ],
-  },
-  workingStyle: {
-    eyebrow: "Forma de trabajo",
-    title: "Cómo suelo operar dentro de equipos de ingeniería.",
-    bullets: [
-      "Prefiero claridad antes que ceremonia y me interesan los estándares que la gente realmente puede seguir.",
-      "Me importa la entrega segura y la preparación para producción, no solo sacar features.",
-      "Me gusta mejorar workflows cuando el resultado es reutilizable, documentado y medible.",
-      "Soy especialmente útil donde se cruzan delivery de producto, calidad de ingeniería y enablement práctico.",
-    ],
-  },
-  downloads: {
-    eyebrow: "Descargas",
-    title: "Archivos del CV en ambos idiomas.",
-    intro:
-      "La web es el formato principal, pero el CV original sigue disponible como PDF descargable.",
-    items: [
-      {
-        href: "/cv/jose-miguel-torres-hernandez-cv-en.pdf",
-        label: "Descargar PDF en inglés",
-        variant: "secondary",
-      },
-      {
-        href: "/cv/jose-miguel-torres-hernandez-cv-es.pdf",
-        label: "Descargar PDF en español",
-        variant: "primary",
       },
     ],
   },

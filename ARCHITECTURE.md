@@ -1,75 +1,93 @@
 # Architecture
 
-## Goal
+## Objetivo
 
-Build `jmtrs.uk` as a fast static site that presents José Miguel Torres Hernández as a senior software engineer with a clear positioning across product engineering, secure delivery, and practical AI enablement.
+`jmtrs.uk` es un sitio estático bilingüe que presenta a José Miguel Torres Hernández como senior software engineer, con posicionamiento claro en product engineering, entrega segura y adopción práctica de IA.
 
-## Technical decisions
+## Decisiones técnicas
 
-- Framework: Astro with static output
-- Language: TypeScript
-- Styling: project-owned CSS with design tokens
-- Fonts: Geist Mono for display, Manrope for body copy
-- Deployment: Cloudflare Pages
-- Content source: versioned localized TypeScript objects
+- Framework: Astro con salida estática
+- Lenguaje: TypeScript
+- Estilos: CSS propio con design tokens (sin frameworks de utilidad)
+- Tipografía: Geist Mono para display, Plus Jakarta Sans Variable para cuerpo de texto
+- Despliegue: Cloudflare Pages
+- Contenido: objetos TypeScript localizados y versionados en el repositorio
 
-## Public interfaces
+## Rutas públicas
 
-### Routes
+| Ruta | Descripción |
+|---|---|
+| `/` | Resolver de idioma — redirige a `/en` o al idioma guardado |
+| `/en` | Página de inicio en inglés |
+| `/es` | Página de inicio en español |
+| `/cv/en` | CV HTML para impresión (inglés) |
+| `/cv/es` | CV HTML para impresión (español) |
+| `/cv/jose-miguel-torres-hernandez-cv-en.pdf` | PDF generado en el build |
+| `/cv/jose-miguel-torres-hernandez-cv-es.pdf` | PDF generado en el build |
 
-- `/`
-  - lightweight resolver page
-  - reads stored locale preference from `localStorage`
-  - redirects to `/en` by default when no preference exists
-- `/en`
-  - English homepage
-- `/es`
-  - Spanish homepage
+## Controles de usuario
 
-### User controls
+**Tema**
+- dark mode por defecto
+- persiste en `localStorage`
+- se inicializa en `<head>` para evitar flash de tema
 
-- Theme switcher
-  - dark mode by default
-  - persists in `localStorage`
-  - initializes in `<head>` to avoid theme flash
-- Language switcher
-  - toggles between `/en` and `/es`
-  - persists the chosen locale
+**Idioma**
+- alterna entre `/en` y `/es`
+- persiste el idioma elegido en `localStorage`
 
-### Downloadable assets
+## Generación de PDFs
 
-- `/cv/jose-miguel-torres-hernandez-cv-en.pdf`
-- `/cv/jose-miguel-torres-hernandez-cv-es.pdf`
+El build ejecuta dos pasos:
 
-## Content architecture
+1. `astro build` — genera el HTML estático, incluyendo `/cv/en` y `/cv/es`
+2. `node scripts/generate-cv-pdfs.mjs` — lanza Playwright, navega a cada página de CV, imprime a PDF con `@page { size: A4 }` y copia el resultado a `public/cv/`
 
-Each locale provides the same semantic structure:
+Los PDFs quedan en `public/cv/` también durante desarrollo para que los enlaces funcionen localmente.
 
-1. Hero
-2. About
-3. Selected experience
-4. Key projects
-5. Technical strengths
-6. Working style
-7. Contact and downloads
+## Arquitectura de contenido
 
-The source of truth lives in `src/content/site.ts`.
+Cada locale exporta un objeto `SiteCopy` y un objeto `CvCopy` desde `src/content/en.ts` y `src/content/es.ts`.
 
-## Rendering model
+**`SiteCopy`** — página de inicio
+- Metadata (pageTitle, description, ogLocale)
+- Controles de cabecera (languageSwitcherLabel, menuLabel, themeLabel, headerCta, headerCtaHref, skipToContent)
+- Navegación (nav — actualmente vacío)
+- Hero (title, intro, summary, actions)
+- Contacto (eyebrow, title, intro, closeLabel, links)
+- Footer (footer, footerInterests)
 
-- Single localized route template generates `/en` and `/es`
-- Shared `BaseLayout.astro` injects metadata, structured data, theme bootstrap, and UI scripts
-- The site remains fully static and does not depend on a CMS or server runtime
+**`CvCopy`** — página de CV imprimible
+- headline, profile, contact, techStack, spokenLanguages
+- keyStrengths, experience, focus, certifications, education, profileFit
+- labels (todas las etiquetas de sección en el idioma correspondiente)
 
-## Accessibility and motion
+La fuente de verdad vive en `src/content/site.ts`, que re-exporta los tipos y agrega los registros indexados por locale.
 
-- semantic landmark structure
-- keyboard-accessible skip link
-- clear focus states
-- reduced motion fallback through `prefers-reduced-motion`
-- both themes designed to preserve contrast
+## Modelo de renderizado
 
-## Tradeoffs
+- Una sola plantilla de ruta localizada genera `/en` y `/es`
+- `BaseLayout.astro` inyecta metadata, datos estructurados, bootstrap de tema y scripts de UI
+- `cv/[locale].astro` es un documento HTML autocontenido con estilos `is:inline` para impresión
+- El sitio es completamente estático y no depende de un CMS ni de un runtime de servidor
 
-- The root locale resolver is client-side because the site is static and must remember user preference without server logic
-- The website uses structured content instead of markdown collections because v1 has one canonical page shape per locale and benefits from typed data
+## Scripts de cliente
+
+| Script | Responsabilidad |
+|---|---|
+| `src/scripts/ui.ts` | Menú móvil, modal de contacto, tema, locale, reveal animation, typewriter del hero |
+| `src/scripts/site-spotlight.ts` | Efecto spotlight de fondo que sigue el cursor |
+
+## Accesibilidad y motion
+
+- estructura semántica con landmarks
+- skip link accesible por teclado
+- focus states visibles en ambos temas
+- `prefers-reduced-motion` desactiva animaciones (cursor del hero, nubes del logo, spotlight, reveals)
+- ambos temas mantienen contraste suficiente
+
+## Compromisos de diseño
+
+- El resolver de idioma en `/` es client-side porque el sitio es estático y necesita recordar la preferencia sin servidor
+- El contenido usa objetos TypeScript en lugar de colecciones Markdown porque la forma de cada página es fija y se beneficia de tipado estricto
+- Los PDFs se generan en el build con Playwright para mantener fidelidad al CSS sin mantener fuentes de diseño separadas

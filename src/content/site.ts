@@ -1,13 +1,4 @@
-export type {
-  Locale,
-  SiteCopy,
-  CvCopy,
-  ExperienceItem,
-  ProjectItem,
-  StrengthItem,
-  ContactLink,
-  Action,
-} from "./types";
+export type { Locale, SiteCopy, CvCopy, ContactLink, Action } from "./types";
 export { personSchema } from "./types";
 
 import type { Locale, SiteCopy, CvCopy } from "./types";

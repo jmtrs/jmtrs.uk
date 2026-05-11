@@ -14,35 +14,10 @@ export type NavItem = {
   label: string;
 };
 
-export type Stat = {
-  label: string;
-  value: string;
-};
-
 export type Action = {
   href: string;
   label: string;
   variant: "primary" | "secondary";
-};
-
-export type ExperienceItem = {
-  role: string;
-  company: string;
-  location: string;
-  period: string;
-  summary: string;
-  bullets: string[];
-};
-
-export type ProjectItem = {
-  title: string;
-  description: string;
-  tags: string[];
-};
-
-export type StrengthItem = {
-  title: string;
-  description: string;
 };
 
 export type ContactLink = {
@@ -129,11 +104,9 @@ export type CvCopy = {
 };
 
 export type SiteCopy = {
-  locale: Locale;
   pageTitle: string;
   description: string;
   ogLocale: string;
-  languageName: string;
   languageSwitcherLabel: string;
   menuLabel: string;
   nav: NavItem[];
@@ -146,40 +119,6 @@ export type SiteCopy = {
     intro: string;
     summary: string;
     actions: Action[];
-    stats: Stat[];
-  };
-  about: {
-    eyebrow: string;
-    title: string;
-    paragraphs: string[];
-  };
-  experience: {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    items: ExperienceItem[];
-  };
-  projects: {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    items: ProjectItem[];
-  };
-  strengths: {
-    eyebrow: string;
-    title: string;
-    items: StrengthItem[];
-  };
-  workingStyle: {
-    eyebrow: string;
-    title: string;
-    bullets: string[];
-  };
-  downloads: {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    items: Action[];
   };
   contact: {
     eyebrow: string;

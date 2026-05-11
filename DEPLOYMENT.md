@@ -1,49 +1,69 @@
 # Deployment
 
-## Target
+## Destino
 
 - Hosting: Cloudflare Pages
-- Source control: GitHub
-- Production domain: `https://jmtrs.uk`
+- Control de versiones: GitHub
+- Dominio de producción: `https://jmtrs.uk`
 
-## Build settings
+## Configuración de build en Cloudflare Pages
 
 - Framework preset: Astro
 - Install command: `pnpm install`
 - Build command: `pnpm build`
 - Output directory: `dist`
 
-## Repository flow
+El comando de build ejecuta `astro build` seguido de `node scripts/generate-cv-pdfs.mjs`, que usa Playwright para renderizar las páginas de CV a PDF.
 
-1. Push the repo to GitHub
-2. Create a Cloudflare Pages project connected to the GitHub repository
-3. Select the production branch
-4. Configure the build settings above
-5. Add `jmtrs.uk` as the custom production domain
+## Flujo del repositorio
 
-## Branch previews
+1. Push del repositorio a GitHub
+2. Crear un proyecto Cloudflare Pages conectado al repositorio
+3. Seleccionar la rama de producción (`main`)
+4. Configurar los ajustes de build anteriores
+5. Añadir `jmtrs.uk` como dominio de producción personalizado
 
-Cloudflare Pages should create preview deployments automatically for pull requests and non-production branches.
+## Preview branches
 
-## Domain behavior
+Cloudflare Pages crea despliegues de preview automáticamente para pull requests y ramas no productivas.
 
-- `https://jmtrs.uk/` serves the locale resolver page
-- `https://jmtrs.uk/en` is the English canonical route
-- `https://jmtrs.uk/es` is the Spanish canonical route
+## Comportamiento de rutas
 
-## Headers
+- `https://jmtrs.uk/` — resolver de idioma (redirige a `/en` o al locale guardado)
+- `https://jmtrs.uk/en` — homepage en inglés (ruta canónica)
+- `https://jmtrs.uk/es` — homepage en español (ruta canónica)
+- `https://jmtrs.uk/cv/en` y `/cv/es` — páginas de CV para impresión / PDF
+- `https://jmtrs.uk/cv/jose-miguel-torres-hernandez-cv-en.pdf` — PDF inglés
+- `https://jmtrs.uk/cv/jose-miguel-torres-hernandez-cv-es.pdf` — PDF español
 
-The site ships a static `public/_headers` file with:
+## Cabeceras de seguridad
 
-- `X-Content-Type-Options`
-- `Referrer-Policy`
-- `X-Frame-Options`
-- `Permissions-Policy`
+El fichero estático `public/_headers` aplica a todas las rutas:
 
-## Post-deploy checklist
+```
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Frame-Options: DENY
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'
+```
 
-- confirm HTTPS on the custom domain
-- validate locale switching on production
-- validate PDF downloads
-- validate sitemap and robots
-- validate metadata and Open Graph previews
+## CI (GitHub Actions)
+
+El workflow `.github/workflows/ci.yml` se ejecuta en cada push a `main` y en pull requests:
+
+1. Checkout
+2. Setup pnpm 10 + Node.js 20
+3. `pnpm install --frozen-lockfile`
+4. `pnpm lint` (Prettier)
+5. `pnpm typecheck` (astro check)
+6. `pnpm build`
+
+## Checklist post-despliegue
+
+- HTTPS activo en el dominio personalizado
+- Validar cambio de idioma en producción
+- Validar descarga de PDFs
+- Validar sitemap y robots.txt
+- Validar metadata y Open Graph previews

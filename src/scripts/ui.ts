@@ -350,21 +350,6 @@ const initReveal = () => {
     return;
   }
 
-  // Assign stagger delays to direct .reveal children of grouped containers
-  document
-    .querySelectorAll<HTMLElement>(
-      ".timeline, .card-grid, .contact-grid, .copy-grid",
-    )
-    .forEach((container) => {
-      Array.from(container.children)
-        .filter((el): el is HTMLElement => el.classList.contains("reveal"))
-        .forEach((el, i) => {
-          if (!el.style.getPropertyValue("--delay")) {
-            el.style.setProperty("--delay", `${i * 90}ms`);
-          }
-        });
-    });
-
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
