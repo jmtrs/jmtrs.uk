@@ -15,24 +15,26 @@
 
 ## Rutas públicas
 
-| Ruta | Descripción |
-|---|---|
-| `/` | Redirección permanente a `/en` |
-| `/en` | Página de inicio en inglés |
-| `/es` | Página de inicio en español |
-| `/cv/en` | CV HTML para impresión (inglés, `noindex`) |
-| `/cv/es` | CV HTML para impresión (español, `noindex`) |
-| `/cv/jose-miguel-torres-hernandez-cv-en.pdf` | PDF generado en el build |
-| `/cv/jose-miguel-torres-hernandez-cv-es.pdf` | PDF generado en el build |
+| Ruta                                         | Descripción                                 |
+| -------------------------------------------- | ------------------------------------------- |
+| `/`                                          | Redirección permanente a `/en`              |
+| `/en`                                        | Página de inicio en inglés                  |
+| `/es`                                        | Página de inicio en español                 |
+| `/cv/en`                                     | CV HTML para impresión (inglés, `noindex`)  |
+| `/cv/es`                                     | CV HTML para impresión (español, `noindex`) |
+| `/cv/jose-miguel-torres-hernandez-cv-en.pdf` | PDF generado en el build                    |
+| `/cv/jose-miguel-torres-hernandez-cv-es.pdf` | PDF generado en el build                    |
 
 ## Controles de usuario
 
 **Tema**
+
 - dark mode por defecto
 - persiste en `localStorage`
 - se inicializa en `<head>` para evitar flash de tema
 
 **Idioma**
+
 - alterna entre `/en` y `/es`
 - persiste el idioma elegido en `localStorage`
 
@@ -51,6 +53,7 @@ Los PDFs quedan en `public/cv/` también durante desarrollo para que los enlaces
 Cada locale exporta un objeto `SiteCopy` y un objeto `CvCopy` desde `src/content/en.ts` y `src/content/es.ts`.
 
 **`SiteCopy`** — página de inicio
+
 - Metadata (pageTitle, description, ogLocale)
 - Controles de cabecera (languageSwitcherLabel, menuLabel, themeLabel, headerCta, headerCtaHref, skipToContent)
 - Navegación (nav — actualmente vacío)
@@ -59,6 +62,7 @@ Cada locale exporta un objeto `SiteCopy` y un objeto `CvCopy` desde `src/content
 - Footer (footer, footerInterests)
 
 **`CvCopy`** — página de CV imprimible
+
 - headline, profile, contact, techStack, spokenLanguages
 - keyStrengths, experience, focus, certifications, education, profileFit
 - labels (todas las etiquetas de sección en el idioma correspondiente)
@@ -74,10 +78,10 @@ La fuente de verdad vive en `src/content/site.ts`, que re-exporta los tipos y ag
 
 ## Scripts de cliente
 
-| Script | Responsabilidad |
-|---|---|
-| `src/scripts/ui.ts` | Menú móvil, modal de contacto, tema, locale, reveal animation, typewriter del hero |
-| `src/scripts/site-spotlight.ts` | Efecto spotlight de fondo que sigue el cursor |
+| Script                          | Responsabilidad                                                                    |
+| ------------------------------- | ---------------------------------------------------------------------------------- |
+| `src/scripts/ui.ts`             | Menú móvil, modal de contacto, tema, locale, reveal animation, typewriter del hero |
+| `src/scripts/site-spotlight.ts` | Efecto spotlight de fondo que sigue el cursor                                      |
 
 ## Accesibilidad y motion
 

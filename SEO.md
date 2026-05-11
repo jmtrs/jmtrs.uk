@@ -38,10 +38,7 @@ Schema `Person` inyectado en cada página de inicio:
   "jobTitle": "Senior Software Engineer",
   "email": "mailto:jmtorres15@gmail.com",
   "url": "https://jmtrs.uk",
-  "sameAs": [
-    "https://github.com/jmtrs",
-    "https://www.linkedin.com/in/jmtrs/"
-  ],
+  "sameAs": ["https://github.com/jmtrs", "https://www.linkedin.com/in/jmtrs/"],
   "homeLocation": {
     "@type": "Place",
     "name": "Valencia, Spain"

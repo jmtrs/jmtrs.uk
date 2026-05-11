@@ -10,7 +10,8 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const copy = siteCopy[locale];
-const isCvLink = (href: string) => href.startsWith("/cv/") && href.endsWith(".pdf");
+const isCvLink = (href: string) =>
+  href.startsWith("/cv/") && href.endsWith(".pdf");
 
 if (!copy) {
   throw new Error(`Unsupported locale: ${locale}`);
@@ -35,8 +36,10 @@ if (!copy) {
                 style={`--characters:${Array.from(line).length};`}
               >
                 <span class="hero-line-text">{line}</span>
-                <span class="hero-line-overlay" aria-hidden="true">{line}</span>
-                <span class="hero-mobile-cursor" aria-hidden="true"></span>
+                <span class="hero-line-overlay" aria-hidden="true">
+                  {line}
+                </span>
+                <span class="hero-mobile-cursor" aria-hidden="true" />
               </span>
             ))
           }

@@ -36,7 +36,7 @@
 
 ## Fase 4 — Publicación
 
-- [X] Repositorio en GitHub
+- [x] Repositorio en GitHub
 - [ ] Proyecto conectado a Cloudflare Pages
 - [ ] Dominio `jmtrs.uk` en producción
 - [ ] SEO y enrutamiento de locale validados en producción

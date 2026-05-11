@@ -23,8 +23,7 @@ const getPageLocale = (): string =>
   document.documentElement.lang === "es" ? "es" : "en";
 
 const canAnimatePageExit = () =>
-  !reducedMotionQuery.matches &&
-  !reducedDataQuery.matches;
+  !reducedMotionQuery.matches && !reducedDataQuery.matches;
 
 const canUseFullHeroEffect = () =>
   !reducedMotionQuery.matches && !reducedDataQuery.matches;
@@ -42,7 +41,8 @@ const getContactModal = () => document.querySelector("[data-contact-modal]");
 
 const getContactModalPanel = () => document.getElementById("contact-modal");
 
-const getHeroTitle = () => document.querySelector<HTMLElement>("[data-hero-title]");
+const getHeroTitle = () =>
+  document.querySelector<HTMLElement>("[data-hero-title]");
 
 const getSiteHeader = () =>
   document.querySelector<HTMLElement>("[data-site-header]");

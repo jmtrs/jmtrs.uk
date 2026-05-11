@@ -20,28 +20,21 @@
 ### Tema dark (por defecto)
 
 ```css
---color-bg: #050505
---color-bg-elevated: #0d0d0d
---color-panel: rgba(255,255,255,0.04)
---color-panel-strong: rgba(255,255,255,0.08)
---color-text: #f5f5f5
---color-secondary: #a1a1a1
---color-muted: #6f6f6f
---color-border: rgba(255,255,255,0.12)
---color-accent: #ffffff
+--color-bg: #050505 --color-bg-elevated: #0d0d0d
+  --color-panel: rgba(255, 255, 255, 0.04)
+  --color-panel-strong: rgba(255, 255, 255, 0.08) --color-text: #f5f5f5
+  --color-secondary: #a1a1a1 --color-muted: #6f6f6f
+  --color-border: rgba(255, 255, 255, 0.12) --color-accent: #ffffff;
 ```
 
 ### Tema light
 
 ```css
---color-bg: #f3f1ec
---color-bg-elevated: #fcfaf5
---color-panel: rgba(17,17,17,0.035)
---color-panel-strong: rgba(17,17,17,0.06)
---color-text: #111111
---color-secondary: #4f4f4f
---color-muted: #747474
---color-border: rgba(18,18,18,0.14)
+--color-bg: #f3f1ec --color-bg-elevated: #fcfaf5
+  --color-panel: rgba(17, 17, 17, 0.035)
+  --color-panel-strong: rgba(17, 17, 17, 0.06) --color-text: #111111
+  --color-secondary: #4f4f4f --color-muted: #747474
+  --color-border: rgba(18, 18, 18, 0.14);
 ```
 
 ## Layout
@@ -79,10 +72,10 @@
 
 ## Archivos de estilos
 
-| Archivo | Responsabilidad |
-|---|---|
-| `global.css` | Tokens, reset, tipografía base, reveal animation, spotlight |
-| `layout.css` | Shell del sitio, cabecera, brand, footer |
-| `header-controls.css` | Nav, botones de cabecera, menú móvil, locale switch |
-| `home.css` | Hero, botones de acción, modal de contacto |
-| `utilities.css` | Utilidades transversales |
+| Archivo               | Responsabilidad                                             |
+| --------------------- | ----------------------------------------------------------- |
+| `global.css`          | Tokens, reset, tipografía base, reveal animation, spotlight |
+| `layout.css`          | Shell del sitio, cabecera, brand, footer                    |
+| `header-controls.css` | Nav, botones de cabecera, menú móvil, locale switch         |
+| `home.css`            | Hero, botones de acción, modal de contacto                  |
+| `utilities.css`       | Utilidades transversales                                    |

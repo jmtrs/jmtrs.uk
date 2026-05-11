@@ -6,7 +6,8 @@
   display: grid;
   align-items: center;
   min-height: calc(
-    100dvh - var(--site-header-height, 5.5rem) - var(--site-footer-height, 5.25rem) - 1rem
+    100dvh - var(--site-header-height, 5.5rem) -
+      var(--site-footer-height, 5.25rem) - 1rem
   );
 }
 
@@ -57,7 +58,8 @@
   border-radius: 1px;
   background: var(--color-accent);
   opacity: 0.72;
-  box-shadow: 0 0 0.3rem color-mix(in srgb, var(--color-accent) 16%, transparent);
+  box-shadow: 0 0 0.3rem
+    color-mix(in srgb, var(--color-accent) 16%, transparent);
   animation: cursor-fade 1.15s ease-in-out infinite;
 }
 
@@ -480,7 +482,8 @@
     height: 0.85em;
     background: var(--color-accent);
     border-radius: 1px;
-    box-shadow: 0 0 0.45rem color-mix(in srgb, var(--color-accent) 24%, transparent);
+    box-shadow: 0 0 0.45rem
+      color-mix(in srgb, var(--color-accent) 24%, transparent);
     will-change: opacity, transform;
     animation: cursor-fade 1.15s ease-in-out infinite;
   }

@@ -14,22 +14,26 @@ El contenido del sitio vive en:
 Cada locale exporta un objeto `web: SiteCopy` con estas secciones:
 
 ### Cabecera y meta
+
 - `pageTitle`, `description`, `ogLocale`
 - `languageSwitcherLabel`, `menuLabel`, `themeLabel`, `skipToContent`
 - `headerCta`, `headerCtaHref` — botón del CV en la cabecera
 - `nav` — array de ítems de navegación (actualmente vacío)
 
 ### Hero
+
 - `title: string[]` — líneas del título (typewriter)
 - `intro: string` — párrafo principal
 - `summary: string` — párrafo secundario
 - `actions: Action[]` — botones CTA (variante `primary` o `secondary`)
 
 ### Contacto (modal)
+
 - `eyebrow`, `title`, `intro`, `closeLabel`
 - `links: ContactLink[]` — cada enlace tiene `label`, `href`, `value`
 
 ### Footer
+
 - `footer: string` — línea de copyright
 - `footerInterests: string` — intereses personales
 
