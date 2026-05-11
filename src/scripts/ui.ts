@@ -211,6 +211,18 @@ const bindInteractiveHandlers = () => {
       return;
     }
 
+    const menu = getMenu();
+    const clickedInsideMenu = !!target.closest("[data-mobile-menu]");
+    const clickedMenuToggle = !!target.closest("[data-menu-toggle]");
+    if (
+      menu instanceof HTMLElement &&
+      menu.dataset.open === "true" &&
+      !clickedInsideMenu &&
+      !clickedMenuToggle
+    ) {
+      closeMenu();
+    }
+
     const themeToggle = target.closest("[data-theme-toggle]");
     if (themeToggle instanceof HTMLButtonElement) {
       const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";

@@ -17,7 +17,6 @@ interface Props {
 const { copy, locale } = Astro.props;
 const currentYear = new Date().getFullYear();
 const canonical = locale === "en" ? "/en" : "/es";
-const alternateLocalePath = locale === "en" ? "/es" : "/en";
 const siteUrl = Astro.site ?? new URL("https://jmtrs.uk");
 const cvLinkTarget = "_blank";
 const cvLinkRel = "noreferrer";
@@ -56,7 +55,6 @@ const schema = {
     <link rel="alternate" hreflang="en" href={englishUrl} />
     <link rel="alternate" hreflang="es" href={spanishUrl} />
     <link rel="alternate" hreflang="x-default" href={englishUrl} />
-    <link rel="prefetch" href={alternateLocalePath} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta property="og:type" content="website" />
