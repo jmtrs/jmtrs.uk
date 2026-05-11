@@ -8,6 +8,7 @@ El sitio tiene dos secciones principales: una página de inicio con hero y modal
 - dark mode por defecto con tema light completo
 - layout editorial responsivo
 - motion accesible y fundamentos SEO sólidos
+- redirección permanente de `/` a `/en` y sitemap generado en el build
 - PDFs del CV autogenerados en cada build
 
 ## Stack
@@ -52,6 +53,7 @@ pnpm format       # Prettier --write
 ├── public/
 │   ├── cv/                    # PDFs generados (en + es)
 │   ├── icons/
+│   ├── _redirects
 │   ├── favicon.svg
 │   ├── logo.svg
 │   ├── social-preview.svg
@@ -59,7 +61,8 @@ pnpm format       # Prettier --write
 │   ├── site.webmanifest
 │   └── _headers
 ├── scripts/
-│   └── generate-cv-pdfs.mjs  # Playwright: renderiza /cv/[locale] → PDF
+│   ├── generate-seo-artifacts.mjs # sitemap-index.xml + sitemap-0.xml
+│   └── generate-cv-pdfs.mjs       # Playwright: renderiza /cv/[locale] → PDF
 ├── src/
 │   ├── components/            # ContactCard, DownloadIcon, LanguageSwitch, ThemeToggle
 │   ├── content/               # Tipos, en.ts, es.ts, site.ts
@@ -68,7 +71,6 @@ pnpm format       # Prettier --write
 │   ├── pages/
 │   │   ├── [locale]/index.astro   # Página de inicio (hero + contacto)
 │   │   ├── cv/[locale].astro      # CV HTML para impresión / PDF
-│   │   └── index.astro            # Resolver de idioma (/ → /en | /es)
 │   ├── scripts/
 │   │   ├── ui.ts                  # Menú, modal, tema, idioma, reveal
 │   │   └── site-spotlight.ts      # Efecto spotlight de fondo
@@ -87,4 +89,5 @@ pnpm format       # Prettier --write
 - GitHub aloja el repositorio y gestiona los pull requests
 - Cloudflare Pages construye el sitio desde la rama `main`
 - Dominio de producción: `https://jmtrs.uk`
+- `https://jmtrs.uk/` redirige a `https://jmtrs.uk/en`
 - Rutas canónicas: `https://jmtrs.uk/en` y `https://jmtrs.uk/es`

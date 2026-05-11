@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 
 export default defineConfig(({ command }) => {
   const isDev = command === "dev";
@@ -7,12 +6,8 @@ export default defineConfig(({ command }) => {
 
   return {
     site: "https://jmtrs.uk",
-    integrations: [sitemap()],
     build: {
       format: "directory",
-    },
-    redirects: {
-      "/": "/en",
     },
     server: {
       host: "127.0.0.1",

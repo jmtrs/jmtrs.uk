@@ -17,11 +17,11 @@
 
 | Ruta | Descripción |
 |---|---|
-| `/` | Resolver de idioma — redirige a `/en` o al idioma guardado |
+| `/` | Redirección permanente a `/en` |
 | `/en` | Página de inicio en inglés |
 | `/es` | Página de inicio en español |
-| `/cv/en` | CV HTML para impresión (inglés) |
-| `/cv/es` | CV HTML para impresión (español) |
+| `/cv/en` | CV HTML para impresión (inglés, `noindex`) |
+| `/cv/es` | CV HTML para impresión (español, `noindex`) |
 | `/cv/jose-miguel-torres-hernandez-cv-en.pdf` | PDF generado en el build |
 | `/cv/jose-miguel-torres-hernandez-cv-es.pdf` | PDF generado en el build |
 
@@ -38,10 +38,11 @@
 
 ## Generación de PDFs
 
-El build ejecuta dos pasos:
+El build ejecuta tres pasos:
 
 1. `astro build` — genera el HTML estático, incluyendo `/cv/en` y `/cv/es`
-2. `node scripts/generate-cv-pdfs.mjs` — lanza Playwright, navega a cada página de CV, imprime a PDF con `@page { size: A4 }` y copia el resultado a `public/cv/`
+2. `node scripts/generate-seo-artifacts.mjs` — genera `sitemap-index.xml` y `sitemap-0.xml`
+3. `node scripts/generate-cv-pdfs.mjs` — lanza Playwright, navega a cada página de CV, imprime a PDF con `@page { size: A4 }` y copia el resultado a `public/cv/`
 
 Los PDFs quedan en `public/cv/` también durante desarrollo para que los enlaces funcionen localmente.
 
@@ -88,6 +89,6 @@ La fuente de verdad vive en `src/content/site.ts`, que re-exporta los tipos y ag
 
 ## Compromisos de diseño
 
-- El resolver de idioma en `/` es client-side porque el sitio es estático y necesita recordar la preferencia sin servidor
+- La raíz pública redirige a `/en` para no depender de JavaScript en SEO
 - El contenido usa objetos TypeScript en lugar de colecciones Markdown porque la forma de cada página es fija y se beneficia de tipado estricto
 - Los PDFs se generan en el build con Playwright para mantener fidelidad al CSS sin mantener fuentes de diseño separadas

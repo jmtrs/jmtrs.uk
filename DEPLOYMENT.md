@@ -13,7 +13,7 @@
 - Build command: `pnpm build`
 - Output directory: `dist`
 
-El comando de build ejecuta `astro build` seguido de `node scripts/generate-cv-pdfs.mjs`, que usa Playwright para renderizar las páginas de CV a PDF.
+El comando de build ejecuta `astro build`, luego `node scripts/generate-seo-artifacts.mjs` para generar el sitemap y después `node scripts/generate-cv-pdfs.mjs`, que usa Playwright para renderizar las páginas de CV a PDF.
 
 ## Flujo del repositorio
 
@@ -29,10 +29,10 @@ Cloudflare Pages crea despliegues de preview automáticamente para pull requests
 
 ## Comportamiento de rutas
 
-- `https://jmtrs.uk/` — resolver de idioma (redirige a `/en` o al locale guardado)
+- `https://jmtrs.uk/` — redirección permanente a `/en`
 - `https://jmtrs.uk/en` — homepage en inglés (ruta canónica)
 - `https://jmtrs.uk/es` — homepage en español (ruta canónica)
-- `https://jmtrs.uk/cv/en` y `/cv/es` — páginas de CV para impresión / PDF
+- `https://jmtrs.uk/cv/en` y `/cv/es` — páginas de CV para impresión / PDF (`noindex`)
 - `https://jmtrs.uk/cv/jose-miguel-torres-hernandez-cv-en.pdf` — PDF inglés
 - `https://jmtrs.uk/cv/jose-miguel-torres-hernandez-cv-es.pdf` — PDF español
 
@@ -63,7 +63,7 @@ El workflow `.github/workflows/ci.yml` se ejecuta en cada push a `main` y en pul
 ## Checklist post-despliegue
 
 - HTTPS activo en el dominio personalizado
-- Validar cambio de idioma en producción
+- Validar redirección `301` de `/` a `/en`
 - Validar descarga de PDFs
 - Validar sitemap y robots.txt
 - Validar metadata y Open Graph previews

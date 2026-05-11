@@ -4,7 +4,8 @@
 
 - `/en` — canónica para inglés
 - `/es` — canónica para español
-- `/` no se trata como contenido canónico (resolver de idioma client-side)
+- `/` redirige de forma permanente a `/en`
+- `/cv/en` y `/cv/es` no forman parte de las URLs indexables
 
 ## Alternate language links
 
@@ -51,12 +52,12 @@ Schema `Person` inyectado en cada página de inicio:
 ## Crawling e indexación
 
 - `public/robots.txt` permite indexación
-- Sitemap generado automáticamente por `@astrojs/sitemap`
+- `sitemap-index.xml` y `sitemap-0.xml` se generan en el build
 - URLs canónicas basadas en `https://jmtrs.uk`
 
 ## Ruta raíz
 
-`/` usa una redirección client-side inmediata, por lo que los motores de búsqueda deben tratar `/en` y `/es` como los destinos indexables.
+`/` redirige a `/en` con `301`, por lo que los motores de búsqueda deben tratar `/en` y `/es` como los destinos indexables.
 
 ## Imagen de Open Graph
 
