@@ -207,10 +207,12 @@ const bindInteractiveHandlers = () => {
     (event) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
-      const localeLink = target.closest<HTMLAnchorElement>("[data-locale-link]");
+      const localeLink =
+        target.closest<HTMLAnchorElement>("[data-locale-link]");
       if (!(localeLink instanceof HTMLAnchorElement)) return;
       const { href } = localeLink;
-      if (document.head.querySelector(`link[rel="prefetch"][href="${href}"]`)) return;
+      if (document.head.querySelector(`link[rel="prefetch"][href="${href}"]`))
+        return;
       const hint = document.createElement("link");
       hint.rel = "prefetch";
       hint.href = href;
