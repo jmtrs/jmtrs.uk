@@ -1,21 +1,49 @@
 ---
+import "./ThemeToggle.css";
+
 interface Props {
   themeLabel: string;
-  darkLabel: string;
-  lightLabel: string;
+  initialTheme?: "dark" | "light";
 }
 
-const { themeLabel, darkLabel, lightLabel } = Astro.props;
+const { themeLabel, initialTheme = "dark" } = Astro.props;
 ---
 
 <button
-  class="control-button"
+  class="theme-toggle"
   type="button"
   data-theme-toggle
-  data-dark-label={darkLabel}
-  data-light-label={lightLabel}
-  aria-live="polite"
+  aria-label={themeLabel}
+  title={themeLabel}
+  aria-pressed={initialTheme === "dark" ? "true" : "false"}
 >
-  <span class="control-label">{themeLabel}</span>
-  <span class="control-value" data-theme-value>{darkLabel}</span>
+  <span class="theme-icon moon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false">
+      <path
+        d="M16.75 15.75A7 7 0 0 1 8.25 7.25a7.25 7.25 0 1 0 8.5 8.5Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.7"></path>
+    </svg>
+  </span>
+  <span class="theme-icon sun" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false">
+      <circle
+        cx="12"
+        cy="12"
+        r="4.1"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"></circle>
+      <path
+        d="M12 2.75v2.5M12 18.75v2.5M21.25 12h-2.5M5.25 12h-2.5M18.54 5.46l-1.77 1.77M7.23 16.77l-1.77 1.77M18.54 18.54l-1.77-1.77M7.23 7.23 5.46 5.46"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-width="1.7"></path>
+    </svg>
+  </span>
+  <span class="sr-only">{themeLabel}</span>
 </button>

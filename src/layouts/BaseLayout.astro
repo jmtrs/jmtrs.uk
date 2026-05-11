@@ -1,8 +1,13 @@
 ---
+import DownloadIcon from "../components/DownloadIcon.astro";
 import LanguageSwitch from "../components/LanguageSwitch.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import type { Locale, SiteCopy } from "../content/site";
+import { personSchema } from "../content/site";
 import "../styles/global.css";
+import "../styles/layout.css";
+import "../styles/header-controls.css";
+import "../styles/utilities.css";
 
 interface Props {
   copy: SiteCopy;
@@ -10,23 +15,22 @@ interface Props {
 }
 
 const { copy, locale } = Astro.props;
+const currentYear = new Date().getFullYear();
 const canonical = locale === "en" ? "/en" : "/es";
-const englishUrl = new URL("/en", Astro.site);
-const spanishUrl = new URL("/es", Astro.site);
-const canonicalUrl = new URL(canonical, Astro.site);
-const ogImage = new URL("/social-preview.svg", Astro.site);
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "José Miguel Torres Hernández",
-  jobTitle: "Senior Software Engineer",
-  url: Astro.site?.toString() ?? "https://jmtrs.uk",
+const siteUrl = Astro.site ?? new URL("https://jmtrs.uk");
+const cvLinkTarget = "_blank";
+const cvLinkRel = "noreferrer";
+const englishUrl = new URL("/en", siteUrl);
+const spanishUrl = new URL("/es", siteUrl);
+const canonicalUrl = new URL(canonical, siteUrl);
+const ogImage = new URL("/social-preview.svg", siteUrl);
+const schema = {
+  ...personSchema,
+  url: siteUrl.toString(),
   homeLocation: {
     "@type": "Place",
     name: locale === "en" ? "Valencia, Spain" : "Valencia, España",
   },
-  sameAs: ["https://github.com/jmtrs", "https://www.linkedin.com/in/jmtrs/"],
-  email: "mailto:jmtorres15@gmail.com",
 };
 ---
 
@@ -68,15 +72,21 @@ const personSchema = {
       })();
     </script>
     <script
+      is:inline
       type="application/ld+json"
-      set:html={JSON.stringify(personSchema)}
+      set:html={JSON.stringify(schema)}
     />
   </head>
   <body>
     <a class="skip-link" href="#content">{copy.skipToContent}</a>
     <div class="site-shell">
-      <header class="site-header reveal">
-        <a class="brand" href={canonical}>
+      <header
+        class:list={[
+          "site-header",
+          { "has-nav": copy.nav.length > 0, "no-nav": copy.nav.length === 0 },
+        ]}
+      >
+        <a class="brand reveal" href={canonical} style="--delay: 40ms;">
           <span class="brand-mark">JMT</span>
           <span class="brand-copy">
             <strong>José Miguel Torres Hernández</strong>
@@ -84,23 +94,81 @@ const personSchema = {
           </span>
         </a>
 
-        <div class="header-meta">
-          <nav class="site-nav" aria-label="Primary">
-            {copy.nav.map((item) => <a href={item.href}>{item.label}</a>)}
-          </nav>
-          <div class="site-controls">
-            <LanguageSwitch
-              locale={locale}
-              label={copy.languageSwitcherLabel}
-            />
-            <ThemeToggle
-              themeLabel={copy.themeLabel}
-              darkLabel={copy.darkLabel}
-              lightLabel={copy.lightLabel}
-            />
-            <a class="header-download" href={copy.headerCtaHref}>
-              {copy.headerCta}
-            </a>
+        {
+          copy.nav.length > 0 && (
+            <nav
+              class="site-nav reveal"
+              aria-label="Primary"
+              style="--delay: 120ms;"
+            >
+              {copy.nav.map((item) => (
+                <a href={item.href}>{item.label}</a>
+              ))}
+            </nav>
+          )
+        }
+
+        <div class="header-actions reveal" style="--delay: 180ms;">
+          <LanguageSwitch locale={locale} label={copy.languageSwitcherLabel} />
+          <ThemeToggle themeLabel={copy.themeLabel} initialTheme="dark" />
+          <a
+            class="header-download"
+            href={copy.headerCtaHref}
+            target={cvLinkTarget}
+            rel={cvLinkRel}
+          >
+            <DownloadIcon />
+            <span class="header-download-label">{copy.headerCta}</span>
+          </a>
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label={copy.menuLabel}
+          >
+            <span class="menu-toggle-box" aria-hidden="true">
+              <span class="menu-toggle-line"></span>
+              <span class="menu-toggle-line"></span>
+              <span class="menu-toggle-line"></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+          <div
+            class:list={[
+              "mobile-menu-panel",
+              { "no-nav": copy.nav.length === 0 },
+            ]}
+          >
+            {
+              copy.nav.length > 0 && (
+                <nav class="mobile-nav" aria-label="Mobile">
+                  {copy.nav.map((item) => (
+                    <a href={item.href}>{item.label}</a>
+                  ))}
+                </nav>
+              )
+            }
+
+            <div class="mobile-toolbar">
+              <LanguageSwitch
+                locale={locale}
+                label={copy.languageSwitcherLabel}
+              />
+              <ThemeToggle themeLabel={copy.themeLabel} initialTheme="dark" />
+              <a
+                class="mobile-download"
+                href={copy.headerCtaHref}
+                target={cvLinkTarget}
+                rel={cvLinkRel}
+              >
+                <DownloadIcon />
+                <span>{copy.headerCta}</span>
+              </a>
+            </div>
           </div>
         </div>
       </header>
@@ -110,51 +178,12 @@ const personSchema = {
       </main>
 
       <footer class="site-footer reveal">
-        <p>{copy.footer}</p>
+        <p class="footer-copy">© {currentYear} · {copy.footer}</p>
+        <p class="footer-interests">{copy.footerInterests}</p>
       </footer>
     </div>
 
-    <script is:inline define:vars={{ locale }}>
-      (() => {
-        const localeKey = "jmtrs-locale";
-        const themeKey = "jmtrs-theme";
-        const root = document.documentElement;
-        const toggle = document.querySelector("[data-theme-toggle]");
-        const toggleValue = document.querySelector("[data-theme-value]");
-
-        const setTheme = (theme) => {
-          root.dataset.theme = theme;
-          window.localStorage.setItem(themeKey, theme);
-          if (toggleValue && toggle instanceof HTMLElement) {
-            const nextLabel =
-              theme === "dark"
-                ? (toggle.dataset.darkLabel ?? "Dark")
-                : (toggle.dataset.lightLabel ?? "Light");
-            toggleValue.textContent = nextLabel;
-          }
-        };
-
-        const initialTheme = root.dataset.theme === "light" ? "light" : "dark";
-        setTheme(initialTheme);
-
-        if (toggle instanceof HTMLButtonElement) {
-          toggle.addEventListener("click", () => {
-            const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
-            setTheme(nextTheme);
-          });
-        }
-
-        window.localStorage.setItem(localeKey, locale);
-
-        document.querySelectorAll("[data-locale-link]").forEach((link) => {
-          link.addEventListener("click", () => {
-            const nextLocale = link.getAttribute("data-locale");
-            if (nextLocale) {
-              window.localStorage.setItem(localeKey, nextLocale);
-            }
-          });
-        });
-      })();
-    </script>
+    <script src="../scripts/ui.ts"></script>
+    <script src="../scripts/site-spotlight.ts"></script>
   </body>
 </html>

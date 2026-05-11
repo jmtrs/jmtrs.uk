@@ -1,0 +1,31 @@
+.project-card h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: -0.05em;
+}
+
+.project-card p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: -0.012em;
+  color: var(--color-secondary);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-list li {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  font-size: 0.84rem;
+}

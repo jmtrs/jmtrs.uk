@@ -1,0 +1,68 @@
+---
+import "./ContactCard.css";
+import type { ContactLink } from "../content/types";
+
+interface Props {
+  link: ContactLink;
+}
+
+const { link } = Astro.props;
+const isExternal = link.href.startsWith("http");
+const labelKey = link.label.toLowerCase();
+const contactType = labelKey.includes("email")
+  ? "email"
+  : labelKey.includes("linkedin")
+    ? "linkedin"
+    : "github";
+---
+
+<a
+  class={`contact-card ${isExternal ? "is-external" : "is-direct"}`}
+  href={link.href}
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noreferrer" : undefined}
+  aria-label={`${link.label}: ${link.value}${isExternal ? " (opens in a new tab)" : ""}`}
+>
+  <div class="contact-card-copy">
+    <div class="contact-card-meta">
+      <span>{link.label}</span>
+    </div>
+    <strong>{link.value}</strong>
+  </div>
+  <div class="contact-card-icon" aria-hidden="true">
+    {
+      contactType === "email" ? (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+        >
+          <path d="M3.75 7.25h16.5v9.5H3.75z" />
+          <path d="m4.5 8 7.5 6 7.5-6" />
+        </svg>
+      ) : contactType === "linkedin" ? (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+        >
+          <path d="M7.25 9.75v7" />
+          <path d="M12.25 16.75v-4.25c0-1.55 1.15-2.75 2.7-2.75 1.45 0 2.3 1 2.3 2.65v4.35" />
+          <path d="M7.25 6.8h.01" />
+        </svg>
+      ) : (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+        >
+          <path d="M9 18.25c-3.2.95-3.2-1.8-4.5-2.25" />
+          <path d="M9 18.25v-2.5c0-.75.05-1.2-.35-1.65-1.3-1.45-2.15-2.15-2.15-4.6 0-.95.3-1.85.9-2.55-.1-.45-.4-2.3.1-2.95 0 0 .85-.25 2.95.95a10.2 10.2 0 0 1 5.1 0c2.1-1.2 2.95-.95 2.95-.95.5.65.2 2.5.1 2.95.6.7.9 1.6.9 2.55 0 2.45-.85 3.15-2.15 4.6-.4.45-.4 1-.4 1.75v2.4" />
+        </svg>
+      )
+    }
+  </div>
+</a>

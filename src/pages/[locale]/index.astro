@@ -1,6 +1,7 @@
 ---
+import "../../styles/home.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SectionHeading from "../../components/SectionHeading.astro";
+import ContactCard from "../../components/ContactCard.astro";
 import { siteCopy, type Locale } from "../../content/site";
 
 export function getStaticPaths() {
@@ -9,6 +10,7 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const copy = siteCopy[locale];
+const isCvLink = (href: string) => href.startsWith("/cv/") && href.endsWith(".pdf");
 
 if (!copy) {
   throw new Error(`Unsupported locale: ${locale}`);
@@ -16,165 +18,94 @@ if (!copy) {
 ---
 
 <BaseLayout locale={locale} copy={copy}>
-  <section class="hero">
-    <div class="hero-copy">
-      <p class="hero-eyebrow reveal">{copy.hero.eyebrow}</p>
-      <h1 class="reveal">{copy.hero.title}</h1>
-      <p class="hero-intro reveal">{copy.hero.intro}</p>
-      <p class="hero-summary reveal">{copy.hero.summary}</p>
+  <div class="home-stage">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1 class="hero-title reveal" style="--delay: 80ms;">
+          {
+            copy.hero.title.map((line) => (
+              <span class="hero-line">
+                {line}
+                <span class="hero-cursor" aria-hidden="true" />
+              </span>
+            ))
+          }
+        </h1>
+        <p class="hero-intro reveal" style="--delay: 220ms;">
+          {copy.hero.intro}
+        </p>
+        <p class="hero-summary reveal" style="--delay: 340ms;">
+          {copy.hero.summary}
+        </p>
+        <div class="action-row reveal" style="--delay: 460ms;">
+          {
+            copy.hero.actions.map((action) =>
+              action.href === "#contact-modal" ? (
+                <button
+                  class={`button ${action.variant}`}
+                  type="button"
+                  data-contact-open
+                  aria-haspopup="dialog"
+                  aria-controls="contact-modal"
+                >
+                  <span>{action.label}</span>
+                  <span class="button-emblem" aria-hidden="true">
+                    →
+                  </span>
+                </button>
+              ) : (
+                <a
+                  class={`button ${action.variant}`}
+                  href={action.href}
+                  target={isCvLink(action.href) ? "_blank" : undefined}
+                  rel={isCvLink(action.href) ? "noreferrer" : undefined}
+                >
+                  <span>{action.label}</span>
+                  <span class="button-emblem" aria-hidden="true">
+                    {action.variant === "primary" ? "↓" : "→"}
+                  </span>
+                </a>
+              ),
+            )
+          }
+        </div>
+      </div>
+    </section>
+  </div>
 
-      <div class="action-row reveal">
-        {
-          copy.hero.actions.map((action) => (
-            <a class={`button ${action.variant}`} href={action.href}>
-              {action.label}
-            </a>
-          ))
-        }
+  <div class="contact-modal" data-contact-modal hidden>
+    <div class="contact-modal-backdrop" data-contact-close aria-hidden="true">
+    </div>
+    <div class="contact-modal-shell">
+      <div
+        class="contact-modal-panel"
+        id="contact-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contact-modal-title"
+        aria-describedby="contact-modal-intro"
+        tabindex="-1"
+      >
+        <div class="contact-modal-header">
+          <div class="contact-modal-heading">
+            <p class="contact-modal-kicker">{copy.contact.eyebrow}</p>
+            <h2 id="contact-modal-title">{copy.contact.title}</h2>
+            <p id="contact-modal-intro">{copy.contact.intro}</p>
+          </div>
+          <button
+            class="contact-modal-close"
+            type="button"
+            data-contact-close
+            aria-label={copy.contact.closeLabel}
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <div class="contact-modal-grid">
+          {copy.contact.links.map((link) => <ContactCard link={link} />)}
+        </div>
       </div>
     </div>
-
-    <aside class="hero-panel reveal">
-      <div class="hero-panel-inner">
-        {
-          copy.hero.stats.map((stat) => (
-            <div class="stat-item">
-              <span>{stat.label}</span>
-              <strong>{stat.value}</strong>
-            </div>
-          ))
-        }
-      </div>
-    </aside>
-  </section>
-
-  <section id="about" class="content-section">
-    <SectionHeading eyebrow={copy.about.eyebrow} title={copy.about.title} />
-    <div class="copy-grid">
-      {
-        copy.about.paragraphs.map((paragraph) => (
-          <p class="reveal">{paragraph}</p>
-        ))
-      }
-    </div>
-  </section>
-
-  <section id="experience" class="content-section">
-    <SectionHeading
-      eyebrow={copy.experience.eyebrow}
-      title={copy.experience.title}
-      intro={copy.experience.intro}
-    />
-    <div class="timeline">
-      {
-        copy.experience.items.map((item) => (
-          <article class="timeline-card reveal">
-            <div class="timeline-heading">
-              <div>
-                <p class="role">{item.role}</p>
-                <p class="company">{item.company}</p>
-              </div>
-              <div class="timeline-meta">
-                <span>{item.location}</span>
-                <strong>{item.period}</strong>
-              </div>
-            </div>
-            <p class="timeline-summary">{item.summary}</p>
-            <ul>
-              {item.bullets.map((bullet) => (
-                <li>{bullet}</li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section id="projects" class="content-section">
-    <SectionHeading
-      eyebrow={copy.projects.eyebrow}
-      title={copy.projects.title}
-      intro={copy.projects.intro}
-    />
-    <div class="card-grid">
-      {
-        copy.projects.items.map((project) => (
-          <article class="project-card reveal">
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <ul class="tag-list">
-              {project.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section id="strengths" class="content-section">
-    <SectionHeading
-      eyebrow={copy.strengths.eyebrow}
-      title={copy.strengths.title}
-    />
-    <div class="card-grid strengths-grid">
-      {
-        copy.strengths.items.map((item) => (
-          <article class="strength-card reveal">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="content-section split-section">
-    <div>
-      <SectionHeading
-        eyebrow={copy.workingStyle.eyebrow}
-        title={copy.workingStyle.title}
-      />
-      <ul class="plain-list reveal">
-        {copy.workingStyle.bullets.map((bullet) => <li>{bullet}</li>)}
-      </ul>
-    </div>
-
-    <div class="downloads-panel">
-      <SectionHeading
-        eyebrow={copy.downloads.eyebrow}
-        title={copy.downloads.title}
-        intro={copy.downloads.intro}
-      />
-      <div class="download-actions reveal">
-        {
-          copy.downloads.items.map((item) => (
-            <a class={`button ${item.variant}`} href={item.href}>
-              {item.label}
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="content-section contact-section">
-    <SectionHeading
-      eyebrow={copy.contact.eyebrow}
-      title={copy.contact.title}
-      intro={copy.contact.intro}
-    />
-    <div class="contact-grid">
-      {
-        copy.contact.links.map((link) => (
-          <a class="contact-card reveal" href={link.href}>
-            <span>{link.label}</span>
-            <strong>{link.value}</strong>
-          </a>
-        ))
-      }
-    </div>
-  </section>
+  </div>
 </BaseLayout>
