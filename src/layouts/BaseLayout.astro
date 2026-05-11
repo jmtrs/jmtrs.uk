@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import DownloadIcon from "../components/DownloadIcon.astro";
 import LanguageSwitch from "../components/LanguageSwitch.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
@@ -67,7 +68,9 @@ const schema = {
         const theme =
           storedTheme === "light" || storedTheme === "dark"
             ? storedTheme
-            : "dark";
+            : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
         document.documentElement.dataset.theme = theme;
       })();
     </script>
@@ -76,6 +79,7 @@ const schema = {
       type="application/ld+json"
       set:html={JSON.stringify(schema)}
     />
+    <ViewTransitions />
   </head>
   <body>
     <a class="skip-link" href="#content">{copy.skipToContent}</a>
@@ -87,7 +91,9 @@ const schema = {
         ]}
       >
         <a class="brand reveal" href={canonical} style="--delay: 40ms;">
-          <span class="brand-mark">JMT</span>
+          <span class="brand-mark">
+            <img src="/logo.svg" alt="" aria-hidden="true" class="brand-logo" width="32" height="32" />
+          </span>
           <span class="brand-copy">
             <strong>José Miguel Torres Hernández</strong>
             <span>Senior Software Engineer</span>
@@ -109,7 +115,7 @@ const schema = {
         }
 
         <div class="header-actions reveal" style="--delay: 180ms;">
-          <LanguageSwitch locale={locale} label={copy.languageSwitcherLabel} />
+          <LanguageSwitch transition:persist="locale-switch-main" locale={locale} label={copy.languageSwitcherLabel} />
           <ThemeToggle themeLabel={copy.themeLabel} initialTheme="dark" />
           <a
             class="header-download"
@@ -155,6 +161,7 @@ const schema = {
 
             <div class="mobile-toolbar">
               <LanguageSwitch
+                transition:persist="locale-switch-mobile"
                 locale={locale}
                 label={copy.languageSwitcherLabel}
               />
@@ -179,6 +186,7 @@ const schema = {
 
       <footer class="site-footer reveal">
         <p class="footer-copy">© {currentYear} · {copy.footer}</p>
+        <p class="footer-coords" aria-hidden="true">38.09°N 0.85°W</p>
         <p class="footer-interests">{copy.footerInterests}</p>
       </footer>
     </div>

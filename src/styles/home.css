@@ -167,11 +167,14 @@
   border: 1px solid var(--color-border);
   border-radius: var(--surface-radius);
   background: linear-gradient(
-    180deg,
+    160deg,
     var(--color-panel-strong),
-    var(--color-panel)
+    var(--color-panel) 72%
   );
-  box-shadow: var(--shadow-soft);
+  box-shadow:
+    var(--shadow-soft),
+    inset 0 1px 0 color-mix(in srgb, var(--color-accent) 7%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 3%, transparent);
 }
 
 .timeline-card,
@@ -293,7 +296,7 @@
 .contact-modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(5, 5, 5, 0.6);
+  background: var(--color-modal-backdrop);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   opacity: 0;
@@ -325,7 +328,7 @@
   padding: 1.2rem 1rem 1.05rem;
   border: 1px solid var(--color-border);
   border-radius: calc(var(--surface-radius) + 0.1rem);
-  background: #5353532e;
+  background: var(--color-modal-bg);
   box-shadow: var(--shadow-strong);
   overflow: auto;
   opacity: 0;

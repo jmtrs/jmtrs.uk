@@ -205,23 +205,30 @@ const bindInteractiveHandlers = () => {
     const localeLink = target.closest("[data-locale-link]");
     if (localeLink instanceof HTMLElement) {
       const nextLocale = localeLink.getAttribute("data-locale");
-      const nextHref = localeLink.getAttribute("href");
       if (!nextLocale) {
         return;
       }
 
       window.localStorage.setItem(localeKey, nextLocale);
       if (nextLocale === getPageLocale()) {
+        event.preventDefault();
         closeMenu();
         return;
       }
 
-      if (nextHref) {
-        event.preventDefault();
-      }
       setLocaleUi(nextLocale);
       closeMenu();
-      window.location.assign(nextHref ?? `/${nextLocale}`);
+      return;
+    }
+
+    const localeSwitch = target.closest("[data-locale-switch]");
+    if (localeSwitch instanceof HTMLElement) {
+      const currentLocale = getPageLocale();
+      const nextLocale = currentLocale === "en" ? "es" : "en";
+      const targetLink = localeSwitch.querySelector<HTMLAnchorElement>(
+        `[data-locale-link][data-locale="${nextLocale}"]`,
+      );
+      targetLink?.click();
       return;
     }
 
@@ -325,7 +332,11 @@ const bindInteractiveHandlers = () => {
 const syncUi = () => {
   const storedTheme = window.localStorage.getItem(themeKey);
   const initialTheme =
-    storedTheme === "light" || storedTheme === "dark" ? storedTheme : "dark";
+    storedTheme === "light" || storedTheme === "dark"
+      ? storedTheme
+      : window.matchMedia("(prefers-color-scheme: light)").matches
+        ? "light"
+        : "dark";
   setTheme(initialTheme);
   syncLocaleUiFromDocument();
 };
@@ -404,3 +415,13 @@ bindInteractiveHandlers();
 syncUi();
 initReveal();
 initTypewriter();
+
+document.addEventListener("astro:after-swap", () => {
+  syncUi();
+  document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
+    el.style.setProperty("animation", "none");
+    el.style.setProperty("opacity", "1");
+    el.style.setProperty("transform", "none");
+    el.classList.add("is-visible");
+  });
+});

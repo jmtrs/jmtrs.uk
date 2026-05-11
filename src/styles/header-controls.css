@@ -16,11 +16,26 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-secondary);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+  transition:
+    background-size 180ms ease,
+    background-position 0s 180ms,
+    color var(--transition-fast);
 }
 
 .site-nav a:hover {
-  background: var(--color-panel);
   color: var(--color-text);
+  transform: none;
+  background-color: transparent;
+  background-size: 100% 1px;
+  background-position: 0% 100%;
+  transition:
+    background-size 180ms ease,
+    background-position 0s,
+    color var(--transition-fast);
 }
 
 .header-actions {
@@ -43,7 +58,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.72rem;
-  padding: 0 0.72rem 0 0.92rem;
+  padding: 0 0.62rem 0 0.52rem;
   color: var(--color-text);
   font-size: 0.82rem;
   letter-spacing: 0.1em;
@@ -51,11 +66,18 @@
   font-weight: 700;
 }
 
+.header-download,
+.mobile-download {
+  transition:
+    box-shadow var(--transition-fast),
+    color var(--transition-fast);
+}
+
 .header-download:hover,
 .mobile-download:hover {
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.12),
-    0 6px 20px rgba(0, 0, 0, 0.12);
+    0 2px 6px rgba(0, 0, 0, 0.14),
+    0 6px 20px rgba(0, 0, 0, 0.14);
 }
 
 .menu-toggle {
@@ -158,7 +180,7 @@
 .mobile-menu-panel {
   border: 1px solid var(--color-border);
   border-radius: 1.75rem;
-  background: #5353532e;
+  background: var(--color-modal-bg);
   box-shadow: var(--shadow-strong);
   backdrop-filter: blur(20px);
   padding: 0.8rem;
@@ -249,10 +271,35 @@
   min-height: 3rem;
   padding: 0.88rem 1rem;
   border-radius: 1rem;
-  background: color-mix(in srgb, var(--color-panel) 88%, transparent);
+  background-color: color-mix(in srgb, var(--color-panel) 88%, transparent);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 100% calc(100% - 0.88rem);
   color: var(--color-text);
   font-family: var(--font-display);
   letter-spacing: -0.04em;
+  transition:
+    background-size 180ms ease,
+    background-position 0s 180ms,
+    color var(--transition-fast);
+}
+
+.mobile-nav a:hover {
+  transform: none;
+  background-size: 100% 1px;
+  background-position: 0% calc(100% - 0.88rem);
+  transition:
+    background-size 180ms ease,
+    background-position 0s,
+    color var(--transition-fast);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav a,
+  .mobile-nav a {
+    background-image: none;
+  }
 }
 
 /* Mobile base: nav and desktop controls hidden */

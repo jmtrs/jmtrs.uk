@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="JMT favicon">
-  <rect width="96" height="96" rx="24" fill="#050505"/>
-  <rect x="14" y="14" width="68" height="68" rx="18" fill="none" stroke="#f5f5f5" stroke-width="2" opacity="0.82"/>
-  <svg x="20" y="20" width="56" height="56" viewBox="0 0 1254 1254">
-    <g transform="translate(0.000000,1254.000000) scale(0.100000,-0.100000)" fill="#f5f5f5" stroke="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" role="img" aria-label="Mountain logo">
+<g transform="translate(0.000000,1254.000000) scale(0.100000,-0.100000)" fill="#111111" stroke="none">
 <path d="M6327 10988 c-7 -4 -40 -8 -73 -8 l-62 0 -6 -35 c-7 -34 -8 -35 -56
 -35 l-50 0 0 -99 c0 -109 -1 -111 -66 -111 l-34 0 0 -69 0 -70 -52 -3 -53 -3
 -3 -122 -3 -123 -44 0 -45 0 0 -59 0 -60 -52 -3 -53 -3 -3 -137 -3 -138 -54 0
@@ -157,6 +154,5 @@ m-1100 -500 c4 -6 -10 -9 -37 -9 l-43 2 35 7 c19 4 36 8 37 9 1 0 5 -3 8 -9z"/>
 -48 3 l-35 1 0 50 0 50 -50 0 -51 0 1 203 2 202 -46 3 -46 3 0 175 0 174 -50
 0 -50 0 0 -285z"/>
 <path d="M6950 5610 c0 -7 3 -10 7 -7 3 4 3 10 0 14 -4 3 -7 0 -7 -7z"/>
-    </g>
-  </svg>
+</g>
 </svg>

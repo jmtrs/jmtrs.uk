@@ -10,6 +10,13 @@
   padding: 0;
   cursor: pointer;
   color: var(--color-text);
+  transition: box-shadow var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.14),
+    0 6px 20px rgba(0, 0, 0, 0.14);
 }
 
 .theme-icon {
