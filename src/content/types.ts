@@ -5,7 +5,7 @@ export const personSchema = {
   "@type": "Person",
   name: "José Miguel Torres Hernández",
   jobTitle: "Senior Software Engineer",
-  email: "mailto:jmtorres15@gmail.com",
+  email: "mailto:jmtrs@proton.me",
   sameAs: ["https://github.com/jmtrs", "https://www.linkedin.com/in/jmtrs/"],
 } as const;
 

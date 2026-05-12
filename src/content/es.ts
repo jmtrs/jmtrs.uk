@@ -41,8 +41,8 @@ export const web: SiteCopy = {
     links: [
       {
         label: "Email",
-        href: "mailto:jmtorres15@gmail.com",
-        value: "jmtorres15@gmail.com",
+        href: "mailto:jmtrs@proton.me",
+        value: "jmtrs@proton.me",
       },
       {
         label: "LinkedIn",
@@ -70,7 +70,7 @@ export const cv: CvCopy = {
   ],
   contact: {
     phone: "[REDACTED]",
-    email: "jmtorres15@gmail.com",
+    email: "jmtrs@proton.me",
     location: "Valencia, España",
     linkedin: "linkedin.com/in/jmtrs",
     github: "github.com/jmtrs",
