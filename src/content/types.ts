@@ -127,5 +127,6 @@ export type SiteCopy = {
     links: ContactLink[];
   };
   footer: string;
-  footerInterests: string;
+  footerInterestsLabel: string;
+  footerInterests: string[];
 };

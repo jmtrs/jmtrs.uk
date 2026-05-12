@@ -239,6 +239,11 @@ html[data-theme="dark"] .brand-logo {
 }
 
 .footer-interests {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.25em 0.55em;
   margin: 0;
   max-width: 30ch;
   font-family: var(--font-display);
@@ -247,9 +252,12 @@ html[data-theme="dark"] .brand-logo {
   letter-spacing: 0.09em;
   color: var(--color-muted);
   opacity: 0.42;
-  overflow-wrap: anywhere;
   text-align: center;
   text-transform: uppercase;
+}
+
+.footer-interests-label::after {
+  content: ":";
 }
 
 @media (max-width: 30.99rem) {
@@ -269,11 +277,18 @@ html[data-theme="dark"] .brand-logo {
   }
 
   .footer-interests {
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: 0;
     margin-left: auto;
     max-width: 100%;
     line-height: 1.35;
     letter-spacing: 0.14em;
     text-align: right;
+  }
+
+  .footer-interest-item + .footer-interest-item::before {
+    content: " · ";
   }
 }
 
@@ -335,12 +350,11 @@ html[data-theme="dark"] .brand-logo {
   }
 
   .footer-interests {
-    max-width: 34ch;
+    max-width: none;
     margin-left: auto;
     font-size: 0.62rem;
     line-height: 1.55;
     letter-spacing: 0.08em;
     opacity: 0.46;
-    white-space: nowrap;
   }
 }

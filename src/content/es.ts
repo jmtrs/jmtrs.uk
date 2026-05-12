@@ -57,8 +57,8 @@ export const web: SiteCopy = {
     ],
   },
   footer: "Desde la Vega Baja con ❤️ José Miguel Torres Hernández",
-  footerInterests:
-    "Aficiones: código · basket · viajes · huerta · coches · herramientas",
+  footerInterestsLabel: "Aficiones",
+  footerInterests: ["código", "basket", "viajes", "huerta", "coches", "herramientas"],
 };
 
 export const cv: CvCopy = {

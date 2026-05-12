@@ -229,7 +229,10 @@ const schema = {
           {footerHasName && <span class="footer-name"> {personName}</span>}
         </p>
         <p class="footer-coords" aria-hidden="true">38.09°N 0.85°W</p>
-        <p class="footer-interests">{copy.footerInterests}</p>
+        <p class="footer-interests">
+          <span class="footer-interests-label">{copy.footerInterestsLabel}</span>
+          {copy.footerInterests.map(item => <span class="footer-interest-item">{item}</span>)}
+        </p>
       </footer>
     </div>
 

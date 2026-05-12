@@ -57,8 +57,8 @@ export const web: SiteCopy = {
     ],
   },
   footer: "From Vega Baja with ❤️ José Miguel Torres Hernández",
-  footerInterests:
-    "Interests: code · basketball · travel · garden · cars · tools",
+  footerInterestsLabel: "Interests",
+  footerInterests: ["code", "basketball", "travel", "garden", "cars", "tools"],
 };
 
 export const cv: CvCopy = {
