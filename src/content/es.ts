@@ -69,7 +69,6 @@ export const cv: CvCopy = {
     "Capaz de moverse desde arquitectura e implementación hasta testing, CI/CD, observabilidad, documentación, soporte a releases y preparación para producción. Enfoque en mantenibilidad, calidad de código, seguridad, mentoring y mejoras prácticas de productividad para equipos de desarrollo.",
   ],
   contact: {
-    phone: "[REDACTED]",
     email: "jmtrs@proton.me",
     location: "Valencia, España",
     linkedin: "linkedin.com/in/jmtrs",

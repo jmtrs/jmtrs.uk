@@ -70,7 +70,6 @@ export type CvCopy = {
   headline: string;
   profile: string[];
   contact: {
-    phone: string;
     email: string;
     location: string;
     linkedin: string;

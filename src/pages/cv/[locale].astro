@@ -306,11 +306,6 @@ const cv = cvCopy[locale];
             <a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a>
           </p>
           <p class="contact-line">
-            <a href={`tel:${cv.contact.phone.replace(/\s/g, "")}`}
-              >{cv.contact.phone}</a
-            >
-          </p>
-          <p class="contact-line">
             <a href={`https://www.linkedin.com/in/jmtrs/`}
               >{cv.contact.linkedin}</a
             >
@@ -352,9 +347,6 @@ const cv = cvCopy[locale];
         <p class="linkbar">
           {cv.contact.location} ·
           <a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a> ·
-          <a href={`tel:${cv.contact.phone.replace(/\s/g, "")}`}
-            >{cv.contact.phone}</a
-          > ·
           <a href="https://www.linkedin.com/in/jmtrs/">LinkedIn</a> ·
           <a href="https://github.com/jmtrs">GitHub</a>
         </p>

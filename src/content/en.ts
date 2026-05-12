@@ -69,7 +69,6 @@ export const cv: CvCopy = {
     "Comfortable moving from architecture and implementation to testing, CI/CD, observability, documentation, release support and production readiness. Focused on maintainability, code quality, security, mentoring and practical developer productivity improvements.",
   ],
   contact: {
-    phone: "[REDACTED]",
     email: "jmtrs@proton.me",
     location: "Valencia, Spain",
     linkedin: "linkedin.com/in/jmtrs",
