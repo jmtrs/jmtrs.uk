@@ -409,8 +409,8 @@ const updateHeroEffectMode = () => {
 
 bindInteractiveHandlers();
 syncUi();
-syncLayoutMetrics();
 updateHeroEffectMode();
+requestAnimationFrame(() => syncLayoutMetrics());
 
 window.addEventListener("resize", syncLayoutMetrics, { passive: true });
 reducedMotionQuery.addEventListener("change", updateHeroEffectMode);

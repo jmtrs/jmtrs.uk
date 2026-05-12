@@ -10,7 +10,7 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "dev:poll": "ASTRO_TELEMETRY_DISABLED=1 ASTRO_USE_POLLING=1 astro dev",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "node scripts/ensure-playwright-browser.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/generate-seo-artifacts.mjs && node scripts/generate-cv-pdfs.mjs",
+    "build": "node scripts/ensure-playwright-browser.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/inline-css.mjs && node scripts/generate-seo-artifacts.mjs && node scripts/generate-cv-pdfs.mjs",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "lint": "prettier --check .",
     "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check",
