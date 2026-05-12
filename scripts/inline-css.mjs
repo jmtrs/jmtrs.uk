@@ -1,4 +1,10 @@
-import { readFileSync, writeFileSync, readdirSync, statSync, rmSync } from "node:fs";
+import {
+  readFileSync,
+  writeFileSync,
+  readdirSync,
+  statSync,
+  rmSync,
+} from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,16 +19,19 @@ function walk(dir) {
     } else if (entry.endsWith(".html")) {
       let html = readFileSync(full, "utf8");
       let changed = false;
-      html = html.replace(/<link rel="stylesheet" href="([^"]+)">/g, (match, href) => {
-        try {
-          const css = readFileSync(join(dist, href), "utf8");
-          changed = true;
-          inlinedCSSFiles.add(href);
-          return `<style>${css}</style>`;
-        } catch {
-          return match;
-        }
-      });
+      html = html.replace(
+        /<link rel="stylesheet" href="([^"]+)">/g,
+        (match, href) => {
+          try {
+            const css = readFileSync(join(dist, href), "utf8");
+            changed = true;
+            inlinedCSSFiles.add(href);
+            return `<style>${css}</style>`;
+          } catch {
+            return match;
+          }
+        },
+      );
       if (changed) writeFileSync(full, html);
     }
   }
@@ -34,4 +43,6 @@ for (const href of inlinedCSSFiles) {
   rmSync(join(dist, href));
 }
 
-console.log(`CSS inlined and ${inlinedCSSFiles.size} file(s) removed from dist.`);
+console.log(
+  `CSS inlined and ${inlinedCSSFiles.size} file(s) removed from dist.`,
+);
