@@ -14,7 +14,11 @@
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "lint": "prettier --check .",
     "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "validate:staged": "node scripts/validate-staged.mjs",
+    "validate:push": "pnpm typecheck",
+    "hooks:install": "node scripts/install-git-hooks.mjs",
+    "prepare": "node scripts/install-git-hooks.mjs"
   },
   "dependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",

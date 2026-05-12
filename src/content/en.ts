@@ -63,12 +63,13 @@ export const web: SiteCopy = {
 
 export const cv: CvCopy = {
   headline:
-    "Senior Software Engineer | Full-Stack, Backend, Secure Delivery & AI Enablement",
+    "Senior Software Engineer | AI Enablement, Backend, Full-Stack, Secure Delivery",
   profile: [
-    "Senior Software Engineer with a broad product engineering profile across backend, frontend, APIs, secure delivery and AI-enabled development workflows. Strong Java and Spring Boot background, complemented by Node.js, NestJS, Python, FastAPI, React, Vue, Angular, TypeScript and Rust-oriented tooling.",
-    "Comfortable moving from architecture and implementation to testing, CI/CD, observability, documentation, release support and production readiness. Focused on maintainability, code quality, security, mentoring and practical developer productivity improvements.",
+    "Senior Software Engineer with 10+ years of experience across product engineering, backend, full-stack delivery and APIs. Strong Java and Spring Boot foundation, complemented by Node.js, NestJS, Python, FastAPI, React, Next.js, Vue, Angular, TypeScript, GraphQL and Rust-oriented tooling.",
+    "I combine enterprise software delivery with Secure SDLC, Application Security, mentoring and developer productivity improvements. I apply LLM-assisted development, AI coding workflows, automation, documentation and repository instructions to help teams move faster without losing technical control, and I also work with Rust tooling and cross-platform desktop apps when it adds value.",
   ],
   contact: {
+    phone: "Tel. · available on request",
     email: "jmtrs@proton.me",
     location: "Valencia, Spain",
     linkedin: "linkedin.com/in/jmtrs",
@@ -104,7 +105,10 @@ export const cv: CvCopy = {
       items: [
         "CI/CD",
         "Docker",
-        "Kubernetes fundamentals",
+        "Kubernetes",
+        "AWS (EKS)",
+        "Azure (AKS)",
+        "GCP (GKE)",
         "observability",
         "testing",
         "release support",
@@ -125,9 +129,17 @@ export const cv: CvCopy = {
       items: [
         "LLM-assisted development",
         "AI coding workflows",
+        "developer productivity",
         "automation",
         "repository instructions",
         "Rust-oriented tooling",
+        "cross-platform desktop apps",
+        "GitHub Copilot",
+        "Cursor",
+        "Claude Code",
+        "Claude",
+        "GPT-4o",
+        "Llama",
       ],
     },
   ],
@@ -138,23 +150,24 @@ export const cv: CvCopy = {
   ],
   keyStrengths: [
     {
-      title: "Full-stack delivery",
+      title: "Backend and APIs",
       description:
-        "Backend, frontend and API work across the full software lifecycle.",
+        "Service, integration and enterprise delivery work with a strong backend core.",
     },
     {
-      title: "Secure engineering",
+      title: "Full-stack delivery",
       description:
-        "Security-aware delivery, AppSec mindset and production readiness.",
+        "Ability to cover backend, frontend and APIs across the full software lifecycle.",
     },
     {
       title: "AI enablement",
-      description: "Practical LLM-assisted workflows for engineering teams.",
+      description:
+        "Practical LLM-assisted workflows, AI coding workflows and documentation support for engineering teams.",
     },
     {
-      title: "Developer productivity",
+      title: "Secure delivery",
       description:
-        "Mentoring, documentation, automation and reusable delivery practices.",
+        "Secure SDLC, AppSec, mentoring, automation and production readiness.",
     },
   ],
   experience: [
@@ -164,15 +177,15 @@ export const cv: CvCopy = {
       location: "Remote",
       period: "Jul 2021 - Present",
       roleNote:
-        "Senior engineering role across enterprise software delivery, backend and full-stack development, secure engineering practices, technical mentoring and practical AI enablement.",
+        "Senior backend and full-stack role across enterprise software delivery, secure engineering, technical enablement and practical AI adoption.",
       bullets: [
-        "Deliver enterprise software across the stack: design and build backend services, APIs, frontend integrations and platform-oriented components for demanding business and technical contexts.",
-        "Work with multiple backend stacks: mainly Java and Spring Boot, while also contributing to Node.js, NestJS, Python and FastAPI solutions depending on project and client needs.",
-        "Contribute to full lifecycle delivery: technical design, implementation, testing, code reviews, documentation, CI/CD workflows, release support and production readiness.",
-        "Improve secure delivery: support authentication and authorization flows, Secure SDLC practices, Application Security reviews, risk reduction and maintainability improvements.",
-        "Support full-stack execution: collaborate on React, Vue, Angular and TypeScript applications, connecting product requirements with reliable backend and frontend implementation.",
-        "Mentor and enable teams: improve code quality, onboarding material, delivery practices and technical decision-making for internal and client-side teams.",
-        "Drive practical AI enablement: apply LLM-assisted development, AI coding workflows, automation and documentation support to improve productivity in controlled and reusable ways.",
+        "Design and deliver enterprise software across backend and full-stack contexts, building Java and Spring Boot services, APIs, frontend integrations and platform-oriented components for demanding business environments.",
+        "Contribute with Node.js, NestJS, Python and FastAPI when product and client needs require it, while keeping a pragmatic focus on architecture, maintainability and code quality.",
+        "Own complete delivery slices: technical design, implementation, testing, code reviews, documentation, CI/CD, release support and production readiness.",
+        "Strengthen secure delivery through authentication, authorization, Secure SDLC, Application Security reviews and operational risk reduction.",
+        "Drive technical enablement and developer productivity through mentoring, onboarding material, reusable documentation, repository instructions and team-facing engineering standards, reducing onboarding friction and accelerating AI coding workflow adoption across teams.",
+        "Apply practical AI enablement with LLM-assisted development, AI coding workflows, automation and documentation support to improve productivity without losing technical control.",
+        "Built internal Rust tooling for CLI and developer workflow automation, complemented by additional work on tooling and cross-platform desktop apps outside the main role context.",
       ],
     },
     {
@@ -180,10 +193,9 @@ export const cv: CvCopy = {
       company: "nexum AG",
       period: "Mar 2019 - Jul 2021",
       bullets: [
-        "Built production frontend applications: developed complex interfaces using React, Next.js and TypeScript, with focus on maintainability, performance and clean implementation.",
-        "Integrated modern data flows: consumed data through Apollo GraphQL and collaborated with backend and product teams on web architecture decisions.",
-        "Delivered reliable UI experiences: translated product and UX requirements into maintainable interfaces for production environments.",
-        "Selected projects: thesting.com and manor.ch.",
+        "Built production frontend applications with React, Next.js and TypeScript for projects such as thesting.com and manor.ch, focusing on maintainability, performance and clean implementation.",
+        "Delivered Next.js migrations and implementations with Apollo GraphQL integration, achieving roughly ~2 s loading improvements while strengthening SEO and user experience.",
+        "Translated product and UX requirements into maintainable interfaces, collaborating with backend and product teams on web architecture decisions.",
       ],
     },
     {
@@ -191,42 +203,32 @@ export const cv: CvCopy = {
       company: "Independent Projects",
       period: "2015 - 2019",
       bullets: [
-        "Delivered end-to-end web projects: covered implementation, deployment, client communication, CMS customization and iterative improvements for multiple clients.",
-        "Worked across frontend and backend: built React and Redux applications, integrated REST APIs and contributed backend work in C# and PHP.",
-        "Improved existing digital products: supported portals, booking flows, migrations, SEO improvements, performance optimization and PWA-oriented enhancements.",
+        "Parallel freelance activity between 2015 and 2019, alongside academic work and the transition into full professional environments.",
+        "Delivered end-to-end web projects covering implementation, deployment, client communication, CMS customization and iterative improvements for multiple clients.",
+        "Worked across frontend and backend with React, Redux and REST APIs; C# with ASP.NET and PHP with WordPress, Joomla and Laravel, including CMS customization, SEO, performance, migration and PWA-oriented improvements.",
       ],
     },
   ],
   focus: [
     {
-      title: "Full-stack enterprise delivery",
+      title: "AI enablement and developer productivity",
       description:
-        "Backend services, frontend integration, APIs, documentation, testing, release support and production-oriented execution.",
+        "LLM-assisted development, AI coding workflows, automation, documentation and repository instructions applied in practical delivery contexts.",
     },
     {
-      title: "Secure software engineering",
+      title: "Backend and APIs",
       description:
-        "Secure SDLC, authentication, authorization, AppSec awareness, code reviews, risk reduction and maintainability.",
+        "Java, Spring Boot, Node.js, NestJS, Python, FastAPI, REST APIs and GraphQL for product-oriented execution.",
     },
     {
-      title: "AI enablement",
+      title: "Secure delivery",
       description:
-        "LLM-assisted development, AI coding tools, workflow automation, repository instructions, documentation support and onboarding improvements.",
+        "Secure SDLC, authentication, authorization, Application Security, code reviews and production readiness.",
     },
     {
-      title: "Rust-oriented tooling",
+      title: "Rust, tooling and desktop",
       description:
-        "CLI/tooling exploration and automation work focused on reliable developer workflows, not positioned as primary commercial Rust specialization.",
-    },
-    {
-      title: "Engineering leadership",
-      description:
-        "Mentoring, technical documentation, pragmatic architecture, code quality and cross-functional delivery.",
-    },
-    {
-      title: "Cloud-ready delivery",
-      description:
-        "Containerized environments, CI/CD-oriented workflows, observability and production readiness practices.",
+        "Rust CLI and automation work, plus selective cross-platform desktop app work as a complementary capability.",
     },
   ],
   certifications: [
@@ -234,16 +236,17 @@ export const cv: CvCopy = {
     { name: "Vault Fundamentals", detail: "Thought Machine, Mar 2022" },
   ],
   education: {
-    degree: "Software Engineering / Information Technology",
+    degree:
+      "Bachelor's Degree in Software Engineering and Information Technology",
     school: "Universidad Miguel Hernández de Elche",
     period: "2012 - 2018",
   },
   profileFit: [
-    "Senior Software Engineer",
-    "Full-Stack Engineer",
-    "Backend Engineer",
-    "Platform-oriented Software Engineer",
     "AI Enablement / Developer Productivity",
+    "Senior Software Engineer",
+    "Backend Engineer",
+    "Full-Stack Engineer",
+    "Platform-oriented Software Engineer",
     "Secure Software Engineering",
   ],
   labels: {

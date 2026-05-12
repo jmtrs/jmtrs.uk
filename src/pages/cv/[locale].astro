@@ -8,6 +8,8 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const cv = cvCopy[locale];
+const primaryExperience = cv.experience[0];
+const additionalExperience = cv.experience.slice(1);
 ---
 
 <!doctype html>
@@ -27,491 +29,323 @@ const cv = cvCopy[locale];
         padding: 0;
       }
       body {
-        margin: 0;
         font-family:
           "Plus Jakarta Sans Variable", "Avenir Next", "Helvetica Neue",
           sans-serif;
-        color: #1c1c1e;
+        color: #1b1b1d;
         background: #fff;
-        font-size: 9.15pt;
-        line-height: 1.34;
+        font-size: 9.75pt;
+        line-height: 1.4;
+      }
+      a {
+        color: #1b1b1d;
+        text-decoration: none;
       }
       .page {
         width: 210mm;
         height: 297mm;
-        display: grid;
-        grid-template-columns: 58mm 1fr;
-        background: #fff;
-        break-after: auto;
+        padding: 14.5mm 14.5mm 13.5mm;
+        display: flex;
+        flex-direction: column;
+        gap: 5.6mm;
         overflow: hidden;
       }
       .page + .page {
         break-before: page;
       }
-      .side {
-        background: #1a1a1a;
-        padding: 16mm 8mm 13mm 10.5mm;
-        box-shadow: inset 0 0 0 4px #fff;
-      }
-      .main {
-        padding: 17mm 13mm 13mm 12mm;
-        background: #fff;
-      }
-      .mono {
-        width: 28mm;
-        height: 28mm;
-        border: 0;
+      header {
+        position: relative;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: -1.5mm auto 8.5mm auto;
-        overflow: hidden;
+        flex-direction: column;
+        gap: 1.9mm;
+        padding-right: 38mm;
+        padding-bottom: 2.8mm;
+        border-bottom: 0.35mm solid #e7e7ea;
       }
-      .mono svg {
-        width: 24mm;
-        height: 24mm;
+      .header-top {
         display: block;
-        transform: translate(-1.5mm, -2mm);
       }
-      .side-section {
-        margin: 0 0 8.5mm 0;
-      }
-      .side-section.tight {
-        margin-bottom: 6.8mm;
-      }
-      .side-title {
-        margin: 0 0 3.7mm 0;
-        padding-top: 2.4mm;
-        font-size: 7.1pt;
-        line-height: 1;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #888;
-        font-weight: 700;
-      }
-      .side p,
-      .side a,
-      .side li {
-        font-size: 8.2pt;
-        color: #d4d4d4;
-      }
-      .side a {
-        text-decoration: none;
-        word-break: break-all;
-        color: #d4d4d4;
-      }
-      .contact-line {
-        margin: 0 0 2.2mm 0;
-      }
-      .muted {
-        color: #666;
-      }
-      .side .muted {
-        color: #888;
-      }
-      .label {
-        display: block;
-        font-size: 6.7pt;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #888;
-        font-weight: 700;
-        margin: 3.1mm 0 0.8mm;
-      }
-      .stack p {
-        margin: 0 0 2.3mm 0;
-      }
-      .small-list {
-        margin: 0;
-        padding-left: 0;
-        list-style: none;
-      }
-      .small-list li {
-        margin: 0 0 2.1mm 0;
+      .brand-mark {
+        position: absolute;
+        margin-top: -10mm;
+        top: 0;
+        right: 0;
+        width: 35mm;
+        height: 35mm;
       }
       h1 {
-        font-size: 23pt;
-        line-height: 1;
-        margin: 0 0 3.2mm 0;
-        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1.02;
         letter-spacing: -0.04em;
       }
       .headline {
-        font-size: 9.6pt;
-        color: #555;
-        font-weight: 600;
-        margin: 0 0 2.6mm 0;
+        font-size: 9.9pt;
+        font-weight: 700;
+        color: #333;
+        white-space: nowrap;
       }
-      .linkbar {
-        font-size: 8.3pt;
-        color: #555;
-        margin: 0 0 7.5mm 0;
-      }
-      .linkbar a {
-        color: #444;
-        text-decoration: none;
+      .contact-bar {
+        font-size: 9pt;
+        color: #4d4d52;
       }
       .section-title {
-        margin: 7.4mm 0 3.5mm 0;
         font-size: 7.2pt;
         line-height: 1;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: #888;
+        color: #777;
         font-weight: 700;
+        margin-bottom: 2.6mm;
       }
-      .section-title.first {
-        margin-top: 0;
+      .profile p + p,
+      .stack-list p + p,
+      .summary-list li + li,
+      .focus-list li + li,
+      .job + .job,
+      .meta-list li + li,
+      .cert-list li + li {
+        margin-top: 2.2mm;
       }
-      .profile p {
-        margin: 0 0 3mm 0;
+      .stack-list p,
+      .profile p,
+      .job p,
+      .meta-copy p,
+      .meta-copy li {
+        color: #2f2f33;
       }
-      .cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3.1mm 5mm;
-        margin-top: 1mm;
+      .stack-list strong,
+      .meta-copy strong {
+        color: #121214;
       }
-      .card {
-        padding-top: 2.2mm;
+      .summary-list,
+      .job-list,
+      .focus-list,
+      .meta-list,
+      .cert-list {
+        padding-left: 4.2mm;
       }
-      .card-title {
-        font-weight: 700;
-        font-size: 9pt;
-        margin-bottom: 1mm;
-      }
-      .card-copy {
-        color: #555;
-        font-size: 8.2pt;
+      .summary-list li,
+      .job-list li,
+      .focus-list li,
+      .meta-list li,
+      .cert-list li {
+        padding-left: 0.7mm;
       }
       .job {
-        margin: 0 0 5mm 0;
-      }
-      .job + .job {
-        margin-top: 5.5mm;
+        margin-top: 1.1mm;
       }
       .job-head {
         display: flex;
-        align-items: flex-start;
         justify-content: space-between;
-        gap: 5mm;
-        margin-bottom: 1.3mm;
+        align-items: flex-start;
+        gap: 4mm;
+        margin-bottom: 1.8mm;
       }
-      .job-title {
+      .job-role {
         font-weight: 700;
-        font-size: 10.2pt;
-        letter-spacing: -0.01em;
+        font-size: 10.55pt;
       }
-      .company {
+      .job-company {
         font-weight: 600;
       }
-      .meta {
-        color: #777;
-        font-size: 8.4pt;
-        white-space: nowrap;
-        padding-top: 0.8mm;
-      }
-      .role-note {
-        margin: 0 0 2mm 0;
-        color: #555;
-        font-size: 8.4pt;
-        font-style: italic;
-      }
-      ul.bullets {
-        margin: 0;
-        padding-left: 4.3mm;
-      }
-      ul.bullets li {
-        margin: 0 0 1.65mm 0;
-        padding-left: 0.6mm;
-      }
-      .two-col-focus {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3.4mm 6mm;
-        margin-top: 1mm;
-      }
-      .focus-item {
-        padding-top: 2mm;
-      }
-      .focus-item strong {
-        display: block;
-        margin-bottom: 0.7mm;
-      }
-      .focus-item span {
-        color: #555;
-        font-size: 8.3pt;
-      }
-      .edu-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 5mm;
-      }
-      .edu-block {
-        padding-top: 2mm;
-      }
-      .edu-block strong {
-        display: block;
-      }
-      .footer {
-        position: absolute;
-        bottom: 8mm;
-        color: #aaa;
-        font-size: 7.3pt;
-      }
-      .side .footer {
+      .job-meta {
+        font-size: 8.65pt;
         color: #666;
+        white-space: nowrap;
       }
-      .main,
-      .side {
-        position: relative;
+      .job-note {
+        margin-bottom: 2.2mm;
+        color: #4d4d52;
+        font-style: italic;
+        font-size: 8.85pt;
+      }
+      .profile-fit {
+        color: #2f2f33;
+      }
+      .compact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4mm;
+      }
+      .meta-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 1.6mm;
+      }
+      .meta-copy ul {
+        margin: 0;
       }
     </style>
   </head>
   <body>
-    <svg
-      aria-hidden="true"
-      style="position:absolute;width:0;height:0;overflow:hidden"
-    >
-      <defs>
-        <symbol id="cv-logo" viewBox="0 0 1254 1254">
-          <g
-            transform="translate(0,1254) scale(0.1,-0.1)"
-            fill="#ffffff"
-            stroke="none"
-          >
-            <path
-              d="M6327 10988 c-7 -4 -40 -8 -73 -8 l-62 0 -6 -35 c-7 -34 -8 -35 -56 -35 l-50 0 0 -99 c0 -109 -1 -111 -66 -111 l-34 0 0 -69 0 -70 -52 -3 -53 -3 -3 -122 -3 -123 -44 0 -45 0 0 -59 0 -60 -52 -3 -53 -3 -3 -137 -3 -138 -54 0 -55 0 0 -70 0 -70 -47 4 c-65 7 -83 -10 -83 -81 l0 -53 -90 0 -90 0 0 -114 0 -115 -47 -3 -48 -3 -3 -52 -3 -52 -47 -3 -47 -3 -3 -67 -3 -68 -39 0 -40 0 0 -170 0 -170 -55 0 -55 0 0 -175 0 -175 -55 0 -55 0 0 -105 0 -105 -49 0 -48 0 -7 -100 -8 -99 -51 -3 -52 -3 0 -50 c0 -42 -3 -50 -20 -50 -11 -1 -35 -2 -52 -3 l-33 -2 0 -59 0 -60 -52 -3 -53 -3 -3 -152 -3 -153 -44 0 -44 0 -3 -92 -3 -93 -52 -3 -53 -3 0 -65 0 -64 -45 0 -45 0 0 -49 0 -50 -52 -3 -53 -3 -3 -52 -3 -53 -50 0 -49 0 0 -47 c-1 -27 -2 -100 -3 -163 l-2 -115 55 0 55 0 0 -60 0 -60 50 -5 50 -5 3 -57 3 -58 44 0 45 0 0 -55 0 -55 50 0 49 0 3 -57 3 -57 48 3 47 3 0 -56 0 -55 58 -3 57 -3 0 -54 0 -54 53 -2 52 -2 0 59 0 58 105 0 105 0 0 -110 0 -110 -55 0 -55 0 0 -60 0 -60 -50 0 -50 0 0 -55 0 -55 -55 0 -55 0 0 55 0 55 -50 0 -50 0 0 60 0 60 -50 0 -50 0 0 55 0 55 -52 0 -53 0 3 55 4 55 -51 0 -51 0 0 55 0 55 -50 0 -50 0 0 60 0 60 -55 0 -55 0 0 135 0 135 -49 0 -50 0 -3 43 -3 42 -57 3 -58 3 0 154 0 154 -47 3 -47 3 0 100 -1 100 -57 3 -58 3 0 49 0 49 -52 3 -53 3 -3 102 -3 102 -47 3 -46 3 -1 105 0 105 -47 3 -48 3 0 50 0 49 -50 0 -50 0 0 -50 0 -49 -57 -3 -58 -3 -3 -102 -3 -102 -47 -3 -47 -3 -3 -50 c-2 -27 -7 -54 -13 -59 -5 -6 -9 -22 -9 -37 0 -26 -4 -28 -42 -31 l-43 -3 -3 -112 -3 -112 -57 -3 -57 -3 -3 -162 -2 -163 -100 0 -99 0 -3 -92 -3 -92 -52 3 -53 2 0 -115 0 -115 -47 -3 -48 -3 -1 -80 -2 -80 -70 -3 -70 -3 -7 61 -7 60 -54 0 -54 0 0 -60 0 -60 -45 0 -45 0 0 -55 0 -55 -55 0 -55 0 0 -74 0 -75 -51 -3 -51 -3 0 -110 1 -110 -52 -5 -52 -5 -3 -142 -3 -143 -39 0 c-38 0 -39 -1 -42 -37 l-3 -38 -52 -3 -53 -3 0 -85 0 -84 -43 0 -44 0 -2 -1370 -3 -1370 56 0 55 0 3 -67 c3 -60 5 -68 23 -69 11 0 48 -1 83 -2 l62 -2 0 -40 0 -40 70 0 70 0 0 -64 0 -64 78 -5 c42 -3 86 -6 97 -6 11 0 98 -3 193 -7 159 -6 172 -8 172 -25 0 -11 -4 -19 -10 -19 -11 0 -14 -98 -4 -124 5 -14 44 -16 330 -16 l324 0 0 -70 0 -71 323 1 c177 0 411 0 520 0 l197 0 0 -58 0 -57 2463 0 2462 0 3 58 3 57 514 0 514 0 3 68 3 67 333 3 332 2 0 90 0 90 98 0 c53 0 168 3 255 7 l159 6 -4 69 -3 68 98 0 97 0 0 40 0 39 58 3 57 3 3 63 3 62 32 2 c18 0 39 1 47 2 13 1 15 168 18 1434 l2 1432 -50 0 -49 0 -3 73 -3 72 -52 3 -53 3 0 60 0 59 -50 0 -50 0 0 115 0 115 -55 0 -54 0 -3 93 -3 92 -47 3 -48 3 0 55 0 54 -55 0 -55 0 0 -54 0 -55 -47 -3 -48 -3 3 -52 3 -53 -55 0 -55 0 -3 53 -3 52 -42 3 -43 3 0 55 c0 53 0 54 -30 54 -30 0 -30 1 -30 54 0 52 -1 55 -27 58 -25 3 -26 6 -27 63 l-1 60 -72 3 -73 3 0 49 0 50 -55 0 -55 0 0 115 0 115 -50 0 -50 0 0 59 0 60 -47 3 -48 3 -3 103 -3 102 -57 0 -57 0 0 167 0 168 -47 3 -47 3 -3 52 -3 52 -42 3 c-40 3 -42 4 -45 40 l-3 37 -63 3 -63 3 2 -58 3 -58 -52 -3 -52 -3 0 -52 0 -52 -50 3 c-37 3 -50 0 -51 -10 0 -7 0 -77 0 -155 l1 -143 -55 0 -55 0 0 55 0 56 -57 -3 -58 -3 -3 -52 -3 -52 -42 -3 -42 -3 -3 -107 -3 -108 -54 0 -55 0 0 -56 0 -55 -47 3 -48 3 -5 55 c-3 32 -9 53 -15 50 -6 -3 -12 53 -15 155 l-5 160 -35 0 -35 1 -3 57 -3 57 -54 0 -55 0 0 120 0 120 -54 0 -54 0 -7 40 -7 40 -59 0 -58 0 -3 98 -3 97 -47 3 -48 3 0 114 0 114 -47 3 -48 3 -3 48 c-3 46 -4 47 -38 47 -35 0 -35 0 -38 60 -1 23 -5 25 -53 28 l-53 3 0 60 0 59 -45 0 -45 0 0 165 0 165 -60 0 -59 0 -3 57 -3 58 -42 -3 -43 -4 0 296 0 295 -102 3 -103 3 0 170 0 170 -47 3 -47 3 -3 57 -3 57 -52 3 -52 3 -3 57 -3 57 -47 3 -48 3 0 55 0 54 -50 0 -50 0 0 35 0 35 -50 0 -49 0 -3 63 -3 62 -42 3 -43 3 0 95 0 94 -50 0 -49 0 -3 93 -3 92 -47 3 -47 3 -3 86 -3 86 -50 1 -50 1 -3 83 -3 82 -33 0 c-32 0 -33 1 -32 42 1 40 0 41 -32 42 -19 1 -39 -2 -45 -6z m145 -505 l3 -87 53 3 52 2 0 -55 0 -56 50 0 50 0 0 -160 0 -160 45 0 45 0 0 -55 0 -55 45 0 45 0 0 -60 0 -60 55 0 55 0 0 -60 0 -60 51 0 50 0 -2 -162 -2 -163 49 -5 49 -5 0 -225 0 -225 50 -1 50 -1 3 -121 3 -122 49 0 50 0 0 -115 0 -115 50 0 49 0 3 -107 3 -108 53 -3 52 -3 0 -155 0 -154 50 0 50 0 0 -50 0 -50 55 0 55 0 0 -110 0 -110 45 0 45 0 0 -57 0 -58 50 3 50 4 0 -105 0 -106 43 -3 42 -3 3 -47 3 -48 49 0 49 0 3 -52 3 -53 53 -3 52 -3 0 -110 0 -109 50 0 50 0 0 -50 0 -50 54 0 54 0 7 -115 7 -115 44 0 44 0 0 -60 0 -60 55 0 55 0 0 -55 0 -55 60 0 60 0 0 -55 0 -55 55 0 54 0 3 -57 3 -58 103 -3 102 -3 0 -52 0 -52 105 0 105 0 0 -57 0 -58 110 0 110 0 0 -60 0 -60 95 0 95 0 0 -55 0 -55 161 0 161 0 -4 -57 -3 -58 53 3 52 4 0 -61 0 -61 55 0 55 0 0 -60 0 -60 -55 0 -55 0 0 -55 0 -55 -50 0 -50 0 0 -59 0 -60 -52 -3 -53 -3 -3 -77 -3 -77 -102 -3 -102 -3 -3 -57 -3 -58 -44 0 -44 0 -3 -58 -3 -57 -102 -3 -101 -3 -7 -38 c-3 -20 -5 -44 -3 -52 2 -10 -10 -15 -49 -17 l-53 -3 0 -50 0 -49 -105 0 -104 0 -3 -56 -3 -57 -55 -1 -55 -1 -3 -57 -3 -58 -99 0 -100 0 0 -55 0 -55 -45 0 -45 0 0 -45 0 -45 -60 0 -60 0 0 -55 0 -54 -57 -3 -58 -3 0 -45 0 -45 -57 -3 -58 -3 0 -54 0 -55 -55 0 -55 0 0 -60 0 -60 -55 0 -54 0 -3 -118 -3 -117 -85 0 -85 0 -3 -63 -3 -62 -94 0 -95 0 0 -61 0 -60 -52 2 -53 3 -3 -62 -3 -62 -549 0 -550 0 0 120 0 120 50 0 50 0 0 60 0 60 95 0 95 0 0 60 0 60 53 1 c28 0 96 0 149 -1 l97 -1 3 58 3 58 103 3 102 3 0 59 0 60 95 0 95 0 0 54 c0 59 8 66 78 66 l32 0 0 100 0 100 100 0 100 0 0 45 0 45 55 0 55 0 0 110 0 110 40 0 40 0 0 60 0 60 90 0 90 0 0 50 0 50 85 0 85 0 0 33 c0 75 3 77 101 77 l89 0 0 60 0 60 65 0 65 0 0 55 0 55 -190 0 -190 0 0 -55 0 -55 -100 0 -100 0 0 -60 0 -60 -185 0 -185 0 0 -55 0 -55 -55 0 -55 0 0 -50 0 -49 -102 -3 -103 -3 -1 -55 -1 -55 -49 -1 -49 -1 -3 -56 -3 -57 -104 0 -105 0 0 -55 0 -55 -50 0 -50 0 0 -40 c0 -22 -3 -40 -8 -40 -4 0 -6 18 -4 40 l4 40 -41 0 -41 0 0 -45 0 -45 -145 0 -145 0 0 -54 0 -53 -90 -7 c-49 -4 -94 -5 -100 -1 -6 4 -10 -10 -10 -38 l0 -44 -200 -8 -200 -7 0 -54 0 -54 -105 0 -105 0 0 -60 0 -60 -205 0 -205 0 -1 -42 c-1 -24 -1 -49 0 -55 1 -10 -47 -13 -196 -15 l-198 -3 -3 -57 -3 -58 -102 -2 c-56 -1 -148 -2 -204 -3 l-101 -1 -4 58 -3 58 46 0 c25 0 74 3 108 6 l61 7 0 53 0 54 100 0 100 0 0 60 0 59 143 3 142 3 1 54 1 55 49 -2 c27 -1 63 2 79 7 17 5 22 10 13 10 -17 1 -36 56 -23 69 4 4 51 9 106 10 l99 4 0 54 0 54 205 0 205 0 0 45 0 45 -50 0 -50 0 0 55 0 55 105 0 105 0 0 55 0 55 195 0 195 0 0 60 0 60 295 0 295 0 0 50 0 50 -50 0 -50 0 0 55 0 55 50 0 50 0 0 60 0 60 155 0 155 0 0 55 0 55 133 2 c72 0 185 1 250 0 l117 -1 0 54 0 55 -55 0 c-52 0 -55 1 -55 25 0 23 -4 25 -42 26 -25 1 -32 3 -18 6 71 11 70 10 70 66 l0 52 92 -3 c134 -5 278 7 278 23 0 7 -18 15 -45 19 -43 7 -45 9 -45 41 l0 34 98 3 97 3 3 56 3 56 502 1 502 1 3 61 3 60 -61 0 -60 0 0 60 0 60 -55 0 -55 0 0 55 0 55 -57 0 -58 0 0 52 0 53 -96 3 -96 3 -7 59 -7 60 -104 0 -105 0 0 55 0 55 -60 0 -60 0 0 55 0 55 -60 0 -60 0 0 55 0 55 -54 0 c-30 0 -58 5 -61 10 -3 6 -26 10 -51 10 l-44 0 0 105 0 105 -45 0 -45 0 0 55 0 55 -100 0 -100 0 0 -80 0 -80 -40 0 -39 0 -3 -87 -3 -88 -50 0 -50 0 -3 -57 -3 -57 -51 -3 -51 -3 0 -50 0 -50 -51 -5 -51 -5 -3 -52 -3 -53 -50 0 -49 0 0 -60 0 -60 -50 0 -50 0 0 -54 0 -55 -52 -3 -53 -3 -3 -52 -3 -52 -47 -3 -47 -3 -3 -57 -3 -58 -44 0 -45 0 0 -60 0 -60 -100 0 -100 0 0 -60 0 -60 -45 0 -45 0 0 -55 0 -55 -100 0 -100 0 0 55 0 54 -67 3 -68 3 -5 55 -5 55 -72 3 -73 3 0 59 0 60 -60 0 -60 0 0 60 0 60 -44 0 c-25 0 -47 4 -50 9 -8 12 -49 19 -72 11 -17 -6 -20 -1 -24 39 l-5 46 -45 5 -45 5 0 50 0 50 -57 3 -58 3 0 59 0 60 -104 0 -105 0 -1 88 c-1 145 2 138 -58 134 l-52 -4 0 62 0 62 -45 -4 -45 -3 0 57 0 58 -50 0 -50 0 0 53 0 52 93 0 92 0 3 -52 3 -51 104 -7 105 -7 0 -54 0 -54 55 0 55 0 0 -55 0 -55 55 0 55 0 0 -59 0 -59 45 6 45 5 0 -57 0 -56 108 -2 c59 -1 128 -1 153 1 l46 2 7 -60 7 -60 41 -3 41 -3 1 -55 1 -55 98 -3 97 -3 0 61 0 60 55 0 55 0 0 -60 0 -60 94 0 95 0 3 -52 3 -52 48 -3 47 -3 0 55 0 54 98 3 97 3 3 58 3 57 -51 0 -50 0 0 55 c0 30 -4 55 -10 55 -5 0 -10 -16 -10 -35 0 -21 -5 -35 -12 -35 -9 0 -8 -4 2 -10 12 -8 12 -10 -5 -10 -11 0 -30 -3 -43 -7 -23 -6 -24 -4 -21 48 l3 54 -49 5 -50 5 -2 165 c-1 91 -2 191 -2 223 l-1 57 -95 0 -95 0 0 55 0 55 -100 0 -100 0 0 56 0 56 -47 -2 c-27 -2 -69 -2 -95 -1 l-48 1 0 59 0 60 -52 3 -53 3 -3 212 -2 212 -48 3 -47 3 -3 52 -3 53 -52 -3 -52 -2 -3 158 -3 157 -44 0 -45 0 0 160 0 160 -55 0 -55 0 0 111 0 111 55 -4 55 -3 0 103 0 102 45 0 45 0 2 283 3 282 58 3 57 3 0 119 0 120 45 0 45 0 0 55 0 55 55 0 55 0 0 60 0 60 45 0 45 0 0 55 0 55 50 0 50 0 0 164 c0 91 4 167 8 170 4 2 14 1 22 -5 12 -7 12 -9 -3 -9 -16 0 -18 -7 -15 -42 3 -42 5 -43 41 -46 l37 -3 0 -405 0 -404 55 0 55 0 -2 408 -3 407 -50 0 -50 0 4 338 3 337 -41 0 -41 0 0 130 0 130 35 0 34 0 3 -87z m1328 -5568 c0 -3 -2 -5 -5 -5 -3 0 -5 2 -5 5 0 3 2 5 5 5 3 0 5 -2 5 -5z m2650 -760 l0 -55 95 0 95 0 0 -55 0 -55 -140 0 -140 0 0 -45 0 -45 -90 0 -90 0 0 -55 0 -55 -99 0 -100 0 -3 -47 -3 -48 -105 0 -105 0 -3 -57 -3 -58 -99 0 -100 0 0 -59 0 -60 -52 -3 -52 -3 3 -52 2 -53 -84 0 c-46 0 -118 -3 -160 -6 l-77 -7 0 -53 0 -53 -57 -3 -58 -3 -3 -60 -3 -60 -44 3 -45 4 0 -67 c0 -59 -2 -66 -17 -61 -9 4 -54 4 -100 0 l-83 -7 0 -58 0 -59 -285 0 -285 0 0 120 0 120 50 0 50 0 0 60 0 60 88 2 c48 1 99 1 115 0 27 -2 27 -1 27 58 l0 59 118 3 117 3 3 58 3 57 99 0 100 0 0 60 0 60 50 0 50 0 0 55 0 55 110 0 110 0 0 45 0 45 55 0 55 0 0 60 0 60 257 2 257 3 0 40 1 40 103 3 102 3 0 109 0 110 185 0 185 0 0 -55z m-3880 -450 c0 -3 -2 -5 -5 -5 -3 0 -5 2 -5 5 0 3 2 5 5 5 3 0 5 -2 5 -5z m-327 -853 l227 -2 0 -55 0 -55 -294 0 -294 0 -4 -51 c-1 -28 -1 -53 1 -55 2 -2 73 -4 158 -4 l153 0 0 -45 0 -45 195 0 195 0 0 -49 0 -49 -195 5 c-177 5 -195 4 -195 -11 0 -14 -18 -16 -160 -16 l-160 0 0 -45 0 -45 198 -1 c112 -1 184 -5 167 -9 -25 -6 -20 -8 30 -11 33 -1 116 -3 185 -3 l125 -1 0 -42 0 -43 -150 -2 c-223 -3 -240 -4 -237 -11 1 -4 2 -25 2 -47 l0 -40 290 0 290 0 0 -55 0 -55 -395 0 -395 0 0 -60 0 -60 151 0 150 0 -3 -42 c-3 -43 -3 -43 -45 -46 -38 -3 -43 -6 -43 -28 l0 -24 -420 0 -420 0 0 25 0 25 260 0 260 0 0 45 0 45 -212 1 c-117 1 -234 1 -260 -1 l-48 -2 0 36 c0 35 0 35 48 38 40 3 47 6 50 26 3 22 5 22 166 22 89 0 165 2 167 4 3 3 3 23 1 45 l-4 41 -109 0 -109 0 0 60 0 60 -55 0 -55 0 0 45 0 45 -93 0 c-52 0 -96 2 -98 4 -2 2 -2 28 0 56 l3 51 42 -3 41 -3 0 110 0 110 -40 0 -40 0 -5 50 -5 50 -100 0 c-73 0 -100 -3 -101 -12 -1 -7 -2 -29 -3 -48 -1 -34 -2 -35 -41 -35 l-41 0 3 -112 3 -113 38 3 37 4 0 -56 0 -56 -95 0 -95 0 0 -40 0 -40 -55 0 -55 0 0 -65 0 -65 -160 0 -160 0 0 -45 0 -45 215 0 215 0 0 -60 0 -60 -370 0 c-363 0 -370 0 -370 20 0 14 -7 20 -22 20 -53 0 -68 11 -68 46 l0 34 150 0 c137 0 150 2 149 18 -1 22 -17 70 -18 56 -1 -12 -71 -25 -71 -14 0 3 -3 15 -6 28 -6 22 -5 22 95 22 l101 0 0 45 0 45 -100 0 -100 0 0 51 0 50 -92 -1 c-51 -1 -100 1 -108 4 -8 3 -82 7 -165 8 l-150 3 -1 48 -1 47 414 0 413 0 0 60 0 60 -49 0 -50 0 -3 43 -3 42 -102 3 -103 3 0 -46 0 -45 -100 0 -100 0 0 45 0 45 101 0 100 0 -3 53 -3 52 -255 5 -255 5 -3 52 -3 53 568 2 c625 3 1610 3 1966 0z m825 -164 l-3 -53 -145 0 -145 0 -3 39 c-6 67 -8 66 153 66 l146 0 -3 -52z m307 -428 l0 -40 -187 0 c-102 0 -193 -3 -202 -6 -13 -5 -16 2 -16 38 0 25 2 47 4 49 2 2 94 3 203 1 l198 -3 0 -39z m-1100 -500 c4 -6 -10 -9 -37 -9 l-43 2 35 7 c19 4 36 8 37 9 1 0 5 -3 8 -9z"
-            ></path>
-            <path
-              d="M6580 8535 l0 -285 50 0 50 0 0 -150 0 -150 45 0 45 0 0 -65 0 -65 45 0 45 0 2 -212 3 -213 47 -3 47 -3 3 -47 3 -47 48 -3 47 -3 0 -49 0 -49 53 -3 52 -3 1 -45 0 -45 52 -3 52 -3 0 -55 0 -54 50 0 50 0 0 -105 0 -105 50 0 50 0 0 -169 0 -170 53 -3 52 -3 3 -57 3 -58 49 0 50 0 0 115 0 115 -50 0 -50 0 -2 162 -3 162 -47 -3 -47 -2 -3 63 -3 63 -46 3 c-57 4 -61 14 -52 125 3 43 2 77 -3 78 -5 0 -29 1 -54 2 l-45 2 -3 103 -3 102 -49 0 -49 0 -3 58 -3 57 -40 1 c-22 0 -66 1 -97 2 l-58 2 -2 218 c-2 165 -6 217 -15 218 -7 1 -29 2 -48 3 l-35 1 0 50 0 50 -50 0 -51 0 1 203 2 202 -46 3 -46 3 0 175 0 174 -50 0 -50 0 0 -285z"
-            ></path>
-            <path d="M6950 5610 c0 -7 3 -10 7 -7 3 4 3 10 0 14 -4 3 -7 0 -7 -7z"
-            ></path>
-          </g>
-        </symbol>
-      </defs>
-    </svg>
     <section class="page">
-      <aside class="side">
-        <div class="mono">
-          <svg viewBox="0 0 1254 1254" aria-hidden="true"
-            ><use href="#cv-logo"></use></svg
-          >
+      <header>
+        <div class="header-top">
+          <h1>José Miguel Torres Hernández</h1>
+          <img
+            class="brand-mark"
+            src="../../logo.svg"
+            alt=""
+            aria-hidden="true"
+          />
         </div>
-        <div class="side-section tight">
-          <h3 class="side-title">{cv.labels.contact}</h3>
-          <p class="contact-line">{cv.contact.location}</p>
-          <p class="contact-line">
-            <a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a>
-          </p>
-          <p class="contact-line">
-            <a href={`https://www.linkedin.com/in/jmtrs/`}
-              >{cv.contact.linkedin}</a
-            >
-          </p>
-          <p class="contact-line">
-            <a href={`https://github.com/jmtrs`}>{cv.contact.github}</a>
-          </p>
-        </div>
-        <div class="side-section stack">
-          <h3 class="side-title">{cv.labels.techStack}</h3>
-          {
-            cv.techStack.map((cat) => (
-              <>
-                <span class="label">{cat.name}</span>
-                <p>{cat.items.join(", ")}.</p>
-              </>
-            ))
-          }
-        </div>
-        <div class="side-section tight">
-          <h3 class="side-title">{cv.labels.spokenLanguages}</h3>
-          <ul class="small-list">
-            {
-              cv.spokenLanguages.map((lang) => (
-                <li>
-                  <strong>{lang.name}</strong>
-                  <br />
-                  <span class="muted">{lang.level}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div class="footer">José Miguel Torres Hernández</div>
-      </aside>
-      <main class="main">
-        <h1>José Miguel Torres Hernández</h1>
         <p class="headline">{cv.headline}</p>
-        <p class="linkbar">
+        <p class="contact-bar">
           {cv.contact.location} ·
+          {cv.contact.phone && <>{cv.contact.phone} · </>}
           <a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a> ·
-          <a href="https://www.linkedin.com/in/jmtrs/">LinkedIn</a> ·
-          <a href="https://github.com/jmtrs">GitHub</a>
+          <a href="https://www.linkedin.com/in/jmtrs/">{cv.contact.linkedin}</a> ·
+          <a href="https://github.com/jmtrs">{cv.contact.github}</a>
         </p>
+      </header>
 
-        <h2 class="section-title first">{cv.labels.profile}</h2>
+      <section>
+        <h2 class="section-title">{cv.labels.profile}</h2>
         <div class="profile">
-          {cv.profile.map((para) => <p>{para}</p>)}
+          {cv.profile.map((paragraph) => <p>{paragraph}</p>)}
         </div>
+      </section>
 
+      <section>
         <h2 class="section-title">{cv.labels.keyStrengths}</h2>
-        <div class="cards">
+        <ul class="summary-list">
           {
-            cv.keyStrengths.map((s) => (
-              <div class="card">
-                <div class="card-title">{s.title}</div>
-                <div class="card-copy">{s.description}</div>
-              </div>
+            cv.keyStrengths.map((strength) => (
+              <li>
+                <strong>{strength.title}:</strong> {strength.description}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="section-title">{cv.labels.techStack}</h2>
+        <div class="stack-list">
+          {
+            cv.techStack.map((category) => (
+              <p>
+                <strong>{category.name}:</strong> {category.items.join(", ")}.
+              </p>
             ))
           }
         </div>
+      </section>
 
+      <section>
         <h2 class="section-title">{cv.labels.experience}</h2>
         <article class="job">
           <div class="job-head">
             <div>
-              <span class="job-title">{cv.experience[0].role}</span> ·
-              <span class="company">{cv.experience[0].company}</span>
+              <span class="job-role">{primaryExperience.role}</span> ·{" "}
+              <span class="job-company">{primaryExperience.company}</span>
               {
-                cv.experience[0].location && (
+                primaryExperience.location && (
                   <>
                     {" "}
-                    · <span class="muted">{cv.experience[0].location}</span>
+                    · <span>{primaryExperience.location}</span>
                   </>
                 )
               }
             </div>
-            <div class="meta">{cv.experience[0].period}</div>
+            <div class="job-meta">{primaryExperience.period}</div>
           </div>
           {
-            cv.experience[0].roleNote && (
-              <p class="role-note">{cv.experience[0].roleNote}</p>
+            primaryExperience.roleNote && (
+              <p class="job-note">{primaryExperience.roleNote}</p>
             )
           }
-          <ul class="bullets">
-            {cv.experience[0].bullets.map((b) => <li>{b}</li>)}
+          <ul class="job-list">
+            {primaryExperience.bullets.map((bullet) => <li>{bullet}</li>)}
           </ul>
         </article>
-        <div class="footer">{cv.labels.page1}</div>
-      </main>
+      </section>
     </section>
 
     <section class="page">
-      <aside class="side">
-        <div class="mono">
-          <svg viewBox="0 0 1254 1254" aria-hidden="true"
-            ><use href="#cv-logo"></use></svg
-          >
-        </div>
-        <div class="side-section">
-          <h3 class="side-title">{cv.labels.certifications}</h3>
-          <ul class="small-list">
-            {
-              cv.certifications.map((cert) => (
-                <li>
-                  <strong>{cert.name}</strong>
-                  <br />
-                  <span class="muted">{cert.detail}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div class="side-section">
-          <h3 class="side-title">{cv.labels.education}</h3>
-          <p>
-            <strong>{cv.education.degree}</strong><br />
-            <span class="muted"
-              >{cv.education.school}, {cv.education.period}</span
-            >
-          </p>
-        </div>
-        <div class="side-section">
-          <h3 class="side-title">{cv.labels.profileFit}</h3>
-          <ul class="small-list">
-            {cv.profileFit.map((role) => <li>{role}</li>)}
-          </ul>
-        </div>
-        <div class="side-section">
-          <h3 class="side-title">{cv.labels.links}</h3>
-          <p class="contact-line">
-            <a href="https://www.linkedin.com/in/jmtrs/"
-              >{cv.contact.linkedin}</a
-            >
-          </p>
-          <p class="contact-line">
-            <a href="https://github.com/jmtrs">{cv.contact.github}</a>
-          </p>
-        </div>
-        <div class="footer">José Miguel Torres Hernández</div>
-      </aside>
-      <main class="main">
-        <h2 class="section-title first">{cv.labels.experienceContinued}</h2>
+      <section>
+        <h2 class="section-title">{cv.labels.experience}</h2>
         {
-          cv.experience.slice(1).map((job) => (
+          additionalExperience.map((job) => (
             <article class="job">
               <div class="job-head">
                 <div>
-                  <span class="job-title">{job.role}</span> ·{" "}
-                  <span class="company">{job.company}</span>
+                  <span class="job-role">{job.role}</span> ·{" "}
+                  <span class="job-company">{job.company}</span>
+                  {job.location && (
+                    <>
+                      {" "}
+                      · <span>{job.location}</span>
+                    </>
+                  )}
                 </div>
-                <div class="meta">{job.period}</div>
+                <div class="job-meta">{job.period}</div>
               </div>
-              {job.roleNote && <p class="role-note">{job.roleNote}</p>}
-              <ul class="bullets">
-                {job.bullets.map((b) => (
-                  <li>{b}</li>
+              {job.roleNote && <p class="job-note">{job.roleNote}</p>}
+              <ul class="job-list">
+                {job.bullets.map((bullet) => (
+                  <li>{bullet}</li>
                 ))}
               </ul>
             </article>
           ))
         }
+      </section>
 
+      <section>
         <h2 class="section-title">{cv.labels.focus}</h2>
-        <div class="two-col-focus">
+        <ul class="focus-list">
           {
             cv.focus.map((item) => (
-              <div class="focus-item">
-                <strong>{item.title}</strong>
-                <span>{item.description}</span>
-              </div>
+              <li>
+                <strong>{item.title}:</strong> {item.description}
+              </li>
             ))
           }
-        </div>
+        </ul>
+      </section>
 
+      <section>
         <h2 class="section-title">{cv.labels.eduCertLang}</h2>
-        <div class="edu-grid">
-          <div class="edu-block">
-            <strong>{cv.education.degree}</strong>
-            <span class="muted"
-              >{cv.education.school}, {cv.education.period}</span
-            >
+        <div class="compact-grid">
+          <div class="meta-copy">
+            <p>
+              <strong>{cv.labels.education}:</strong>
+              {cv.education.degree}.{" "}
+              {cv.education.school}, {cv.education.period}.
+            </p>
           </div>
-          <div class="edu-block">
-            <strong>{cv.labels.certifications}</strong>
-            <span class="muted">
+          <div class="meta-copy">
+            <p><strong>{cv.labels.certifications}:</strong></p>
+            <ul class="cert-list">
               {
-                cv.certifications
-                  .map((c) => `${c.name}: ${c.detail}`)
-                  .join("\n")
+                cv.certifications.map((certification) => (
+                  <li>
+                    {certification.name} · {certification.detail}
+                  </li>
+                ))
               }
-            </span>
+            </ul>
           </div>
-          <div class="edu-block">
-            <strong>{cv.labels.spokenLanguages}</strong>
-            <span class="muted">
+          <div class="meta-copy">
+            <p><strong>{cv.labels.spokenLanguages}:</strong></p>
+            <ul class="meta-list">
               {
-                cv.spokenLanguages
-                  .map((l) => `${l.name}: ${l.level}`)
-                  .join("\n")
+                cv.spokenLanguages.map((language) => (
+                  <li>
+                    {language.name} · {language.level}
+                  </li>
+                ))
               }
-            </span>
+            </ul>
           </div>
         </div>
-        <div class="footer">{cv.labels.page2}</div>
-      </main>
+      </section>
+
+      <section>
+        <h2 class="section-title">{cv.labels.profileFit}</h2>
+        <p class="profile-fit">{cv.profileFit.join(" · ")}</p>
+      </section>
     </section>
   </body>
 </html>

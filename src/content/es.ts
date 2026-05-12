@@ -58,17 +58,25 @@ export const web: SiteCopy = {
   },
   footer: "Desde la Vega Baja con ❤️ José Miguel Torres Hernández",
   footerInterestsLabel: "Aficiones",
-  footerInterests: ["código", "basket", "viajes", "huerta", "coches", "herramientas"],
+  footerInterests: [
+    "código",
+    "basket",
+    "viajes",
+    "huerta",
+    "coches",
+    "herramientas",
+  ],
 };
 
 export const cv: CvCopy = {
   headline:
-    "Senior Software Engineer | Full-Stack, Backend, Entrega Segura y Adopción de IA",
+    "Senior Software Engineer | AI Enablement, Backend, Full-Stack, Secure Delivery",
   profile: [
-    "Senior Software Engineer con un perfil amplio de product engineering en backend, frontend, APIs, entrega segura y flujos de desarrollo habilitados por IA. Sólida base en Java y Spring Boot, complementada con Node.js, NestJS, Python, FastAPI, React, Vue, Angular, TypeScript y tooling orientado a Rust.",
-    "Capaz de moverse desde arquitectura e implementación hasta testing, CI/CD, observabilidad, documentación, soporte a releases y preparación para producción. Enfoque en mantenibilidad, calidad de código, seguridad, mentoring y mejoras prácticas de productividad para equipos de desarrollo.",
+    "Senior Software Engineer con más de 10 años de experiencia en product engineering, backend, full-stack y APIs. Base sólida en Java y Spring Boot, complementada con Node.js, NestJS, Python, FastAPI, React, Next.js, Vue, Angular, TypeScript, GraphQL y tooling orientado a Rust.",
+    "Combino entrega de software enterprise con Secure SDLC, Application Security, mentoring y mejoras de developer productivity. Aplico desarrollo asistido por LLMs, AI coding workflows, automatización, documentación e instrucciones de repositorio para acelerar equipos sin perder control técnico, y también trabajo con tooling en Rust y apps desktop multiplataforma cuando aporta valor.",
   ],
   contact: {
+    phone: "Tel. · disponible bajo solicitud",
     email: "jmtrs@proton.me",
     location: "Valencia, España",
     linkedin: "linkedin.com/in/jmtrs",
@@ -104,7 +112,10 @@ export const cv: CvCopy = {
       items: [
         "CI/CD",
         "Docker",
-        "fundamentos de Kubernetes",
+        "Kubernetes",
+        "AWS (EKS)",
+        "Azure (AKS)",
+        "GCP (GKE)",
         "observabilidad",
         "testing",
         "soporte a releases",
@@ -125,9 +136,17 @@ export const cv: CvCopy = {
       items: [
         "Desarrollo asistido por LLMs",
         "AI coding workflows",
+        "developer productivity",
         "automatización",
         "instrucciones de repositorio",
         "tooling con Rust",
+        "apps desktop multiplataforma",
+        "GitHub Copilot",
+        "Cursor",
+        "Claude Code",
+        "Claude",
+        "GPT-4o",
+        "Llama",
       ],
     },
   ],
@@ -138,24 +157,24 @@ export const cv: CvCopy = {
   ],
   keyStrengths: [
     {
-      title: "Entrega full-stack",
+      title: "Backend y APIs",
       description:
-        "Backend, frontend y APIs a lo largo de todo el ciclo de vida del software.",
+        "Diseño y entrega de servicios, integraciones y software enterprise con foco fuerte en backend.",
     },
     {
-      title: "Ingeniería segura",
+      title: "Entrega full-stack",
       description:
-        "Entrega con mentalidad AppSec, seguridad y preparación para producción.",
+        "Capacidad para cubrir backend, frontend y APIs a lo largo de todo el ciclo de vida.",
     },
     {
       title: "Adopción de IA",
       description:
-        "Flujos asistidos por LLMs aplicados de forma práctica en equipos técnicos.",
+        "Flujos asistidos por LLMs, AI coding workflows y documentación práctica para equipos técnicos.",
     },
     {
-      title: "Productividad técnica",
+      title: "Entrega segura",
       description:
-        "Mentoring, documentación, automatización y prácticas reutilizables de delivery.",
+        "Secure SDLC, AppSec, mentoring, automatización y preparación para producción.",
     },
   ],
   experience: [
@@ -165,15 +184,15 @@ export const cv: CvCopy = {
       location: "Remoto",
       period: "Jul 2021 - Actualidad",
       roleNote:
-        "Rol senior en entrega de software empresarial, backend y full-stack, prácticas de ingeniería segura, mentoring técnico y adopción práctica de IA.",
+        "Rol senior en backend y full-stack para software enterprise, entrega segura, enablement técnico y adopción práctica de IA.",
       bullets: [
-        "Entrega de software enterprise full-stack: diseño y desarrollo de servicios backend, APIs, integraciones frontend y componentes orientados a plataforma en contextos técnicos y de negocio exigentes.",
-        "Trabajo con varios stacks backend: principalmente Java y Spring Boot, con contribuciones en Node.js, NestJS, Python y FastAPI según las necesidades del proyecto y del cliente.",
-        "Contribución al ciclo completo de delivery: diseño técnico, implementación, testing, code reviews, documentación, flujos CI/CD, soporte a releases y preparación para producción.",
-        "Mejora de la entrega segura: soporte en autenticación y autorización, prácticas Secure SDLC, revisiones de Application Security, reducción de riesgos y mejora de mantenibilidad.",
-        "Soporte a la ejecución full-stack: colaboración en aplicaciones React, Vue, Angular y TypeScript, conectando requisitos de producto con implementación backend y frontend fiable.",
-        "Mentoring y enablement de equipos: mejora de calidad de código, material de onboarding, prácticas de delivery y toma de decisiones técnicas en equipos internos y de cliente.",
-        "Impulso de adopción práctica de IA: aplicación de desarrollo asistido por LLMs, AI coding workflows, automatización y soporte documental para mejorar la productividad de forma controlada y reutilizable.",
+        "Diseño y entrega de software enterprise en backend y full-stack, construyendo servicios Java y Spring Boot, APIs, integraciones frontend y componentes orientados a plataforma para contextos técnicos y de negocio exigentes.",
+        "Contribuciones sobre Node.js, NestJS, Python y FastAPI cuando el producto o el cliente lo requiere, manteniendo foco en arquitectura pragmática, mantenibilidad y calidad de código.",
+        "Responsabilidad sobre tramos completos de delivery: diseño técnico, implementación, testing, code reviews, documentación, CI/CD, soporte a releases y preparación para producción.",
+        "Refuerzo de entrega segura mediante autenticación, autorización, Secure SDLC, revisiones de Application Security y reducción de riesgos operativos y de mantenibilidad.",
+        "Enablement técnico y developer productivity: mentoring, material de onboarding, estándares de código, documentación reutilizable e instrucciones de repositorio para acelerar equipos, reduciendo fricciones de incorporación y acelerando la adopción de AI coding workflows.",
+        "Adopción práctica de IA con desarrollo asistido por LLMs, AI coding workflows, automatización y soporte documental para mejorar productividad sin perder control técnico.",
+        "Desarrollo de tooling interno con Rust para CLI y automatización de flujos de desarrollo, complementado con trabajo en tooling y apps desktop multiplataforma fuera del contexto principal.",
       ],
     },
     {
@@ -181,10 +200,9 @@ export const cv: CvCopy = {
       company: "nexum AG",
       period: "Mar 2019 - Jul 2021",
       bullets: [
-        "Desarrollo de aplicaciones frontend en producción: creación de interfaces complejas con React, Next.js y TypeScript, con foco en mantenibilidad, rendimiento e implementación limpia.",
-        "Integración de flujos de datos modernos: consumo de datos mediante Apollo GraphQL y colaboración con equipos backend y producto en decisiones de arquitectura web.",
-        "Entrega de experiencias UI fiables: traducción de requisitos de producto y UX a interfaces mantenibles para entornos productivos.",
-        "Proyectos seleccionados: thesting.com y manor.ch.",
+        "Desarrollo de aplicaciones frontend en producción con React, Next.js y TypeScript para proyectos como thesting.com y manor.ch, con foco en mantenibilidad, rendimiento e implementación limpia.",
+        "Migración y construcción sobre Next.js con integración de Apollo GraphQL, consiguiendo mejoras aproximadas de ~2 s en carga y reforzando SEO y experiencia de usuario.",
+        "Traducción de requisitos de producto y UX a interfaces mantenibles, coordinando decisiones de arquitectura web con equipos backend y producto.",
       ],
     },
     {
@@ -192,42 +210,32 @@ export const cv: CvCopy = {
       company: "Proyectos independientes",
       period: "2015 - 2019",
       bullets: [
+        "Actividad freelance paralela entre 2015 y 2019, compaginada con la etapa formativa y la transición a entornos profesionales.",
         "Entrega de proyectos web end-to-end: implementación, despliegue, comunicación con cliente, personalización de CMS y mejoras iterativas para múltiples clientes.",
-        "Trabajo en frontend y backend: desarrollo de aplicaciones con React y Redux, integración de REST APIs y contribuciones backend en C# y PHP.",
-        "Mejora de productos digitales existentes: soporte a portales, flujos de reserva, migraciones, mejoras SEO, optimización de rendimiento y evolución hacia PWA.",
+        "Trabajo en frontend y backend con React, Redux y REST APIs; C# con ASP.NET y PHP con WordPress, Joomla y Laravel, incluyendo personalización de CMS, SEO, rendimiento, migraciones y mejoras orientadas a PWA.",
       ],
     },
   ],
   focus: [
     {
-      title: "Entrega enterprise full-stack",
+      title: "AI enablement y developer productivity",
       description:
-        "Servicios backend, integración frontend, APIs, documentación, testing, soporte a releases y ejecución orientada a producción.",
+        "Desarrollo asistido por LLMs, AI coding workflows, automatización, documentación e instrucciones de repositorio aplicadas de forma práctica.",
     },
     {
-      title: "Ingeniería de software segura",
+      title: "Backend y APIs",
       description:
-        "Secure SDLC, autenticación, autorización, mentalidad AppSec, code reviews, reducción de riesgos y mantenibilidad.",
+        "Java, Spring Boot, Node.js, NestJS, Python, FastAPI, REST APIs y GraphQL para ejecución orientada a producto.",
     },
     {
-      title: "Adopción de IA",
+      title: "Entrega segura",
       description:
-        "Desarrollo asistido por LLMs, AI coding tools, automatización de flujos, instrucciones de repositorio, documentación y mejoras de onboarding.",
+        "Secure SDLC, autenticación, autorización, Application Security, code reviews y preparación para producción.",
     },
     {
-      title: "Tooling orientado a Rust",
+      title: "Rust, tooling y desktop",
       description:
-        "Exploración de CLI, tooling y automatización centrada en flujos fiables para desarrolladores, sin posicionarlo como especialización comercial principal.",
-    },
-    {
-      title: "Liderazgo técnico",
-      description:
-        "Mentoring, documentación técnica, arquitectura pragmática, calidad de código y delivery cross-functional.",
-    },
-    {
-      title: "Entrega cloud-ready",
-      description:
-        "Entornos contenerizados, flujos orientados a CI/CD, observabilidad y preparación para producción.",
+        "CLI y automatización con Rust, más trabajo puntual en apps desktop multiplataforma como capacidad complementaria.",
     },
   ],
   certifications: [
@@ -235,16 +243,16 @@ export const cv: CvCopy = {
     { name: "Vault Fundamentals", detail: "Thought Machine, Mar 2022" },
   ],
   education: {
-    degree: "Ingeniería de Software / Tecnologías de la Información",
+    degree: "Grado en Ingeniería de Software y Tecnologías de la Información",
     school: "Universidad Miguel Hernández de Elche",
     period: "2012 - 2018",
   },
   profileFit: [
-    "Senior Software Engineer",
-    "Full-Stack Engineer",
-    "Backend Engineer",
-    "Platform-oriented Software Engineer",
     "AI Enablement / Developer Productivity",
+    "Senior Software Engineer",
+    "Backend Engineer",
+    "Full-Stack Engineer",
+    "Platform-oriented Software Engineer",
     "Secure Software Engineering",
   ],
   labels: {

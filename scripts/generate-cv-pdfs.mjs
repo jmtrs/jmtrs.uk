@@ -19,6 +19,7 @@ for (const locale of ["en", "es"]) {
     path: `${dist}/cv/${filename}`,
     format: "A4",
     printBackground: true,
+    tagged: true,
   });
   await page.close();
   copyFileSync(`${dist}/cv/${filename}`, `${publicCv}/${filename}`);

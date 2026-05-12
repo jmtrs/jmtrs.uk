@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install *)",
+      "Bash(pnpm dev*)",
+      "Bash(pnpm start*)",
+      "Bash(pnpm preview*)",
+      "Bash(pnpm lint*)",
+      "Bash(pnpm typecheck*)",
+      "Bash(pnpm format*)",
+      "Bash(pnpm build*)",
+      "Bash(pnpm validate:staged*)",
+      "Bash(pnpm validate:push*)",
+      "Bash(pnpm hooks:install*)",
+      "Bash(pnpm exec astro *)",
+      "Bash(pnpm exec playwright *)",
+      "Bash(pnpm exec prettier *)",
+      "Bash(node scripts/*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git checkout *)",
+      "Bash(git config --local core.hooksPath .githooks)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(rg *)"
+    ],
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)"]
+  }
+}
